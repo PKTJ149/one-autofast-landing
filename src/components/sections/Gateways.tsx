@@ -43,10 +43,6 @@ export default function Gateways() {
         <Row items={ROW_A} />
         <Row items={ROW_B} reverse />
       </div>
-
-      <p className="mx-auto mt-10 max-w-[1180px] text-center text-[13px] text-ink-faint">
-        เลื่อนเมาส์ไปวางเพื่อหยุดดูรายชื่อ · รองรับเพิ่มช่องทางใหม่ได้ตลอดเวลา
-      </p>
     </section>
   );
 }

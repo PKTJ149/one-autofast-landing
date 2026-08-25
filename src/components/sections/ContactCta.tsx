@@ -13,8 +13,8 @@ export default function ContactCta() {
 
         <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-pill bg-white/10 px-3 py-1.5 font-display text-[11.5px] font-semibold uppercase tracking-[0.14em]">
-              <i className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-soft" aria-hidden />
+            <span className="inline-flex items-center gap-2 rounded-pill bg-white/10 px-3.5 py-2 font-display text-[14px] font-semibold uppercase tracking-[0.14em]">
+              <i className="h-2.5 w-2.5 animate-pulse rounded-full bg-orange-soft" aria-hidden />
               พร้อมคุยกับคุณตลอด 24 ชม.
             </span>
             <h2 className="mt-5 text-[26px] font-bold leading-[1.35] sm:text-[34px]">

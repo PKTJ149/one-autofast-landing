@@ -114,7 +114,7 @@ export default function Providers() {
               className="pointer-events-none absolute -right-10 -top-12 h-48 w-48 rounded-full bg-orange/40 blur-2xl"
             />
             <div className="relative z-10">
-              <p className="font-display text-[11.5px] font-semibold uppercase tracking-[0.14em] text-white/70">
+              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.14em] text-white/70">
                 หมวด{group.label}
               </p>
               <p className="mt-4 font-display text-[64px] font-bold leading-none">

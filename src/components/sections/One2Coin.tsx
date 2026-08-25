@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const STEPS = [
   {
     title: "ข้ามธนาคาร ประหยัดเวลา",
@@ -37,45 +39,54 @@ export default function One2Coin() {
           }}
         />
 
-        <div className="relative z-10">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-pill bg-white/15 px-3 py-1.5 font-display text-[11.5px] font-semibold uppercase tracking-[0.14em] backdrop-blur-sm">
-                <i className="h-1.5 w-1.5 rounded-full bg-orange-soft" aria-hidden />
-                ONE 2 Coin
-              </span>
-              <h2 className="mt-5 text-[28px] font-bold leading-[1.32] sm:text-[36px]">
-                ฝาก–ถอนได้ครบ
-                <br />
-                โดยไม่ต้องใช้บัญชีธนาคาร
-              </h2>
-            </div>
-            <p className="text-[15.5px] leading-[1.85] text-white/75">
+        {/* Copy and the four steps run down the left; the product shot stands
+            in the right column. */}
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-14">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-pill bg-white/15 px-3.5 py-2 font-display text-[14px] font-semibold uppercase tracking-[0.14em] backdrop-blur-sm">
+              <i className="h-2.5 w-2.5 rounded-full bg-orange-soft" aria-hidden />
+              ONE 2 Coin
+            </span>
+            <h2 className="mt-5 text-[28px] font-bold leading-[1.32] sm:text-[36px]">
+              ฝาก–ถอนได้ครบ
+              <br />
+              โดยไม่ต้องใช้บัญชีธนาคาร
+            </h2>
+            <p className="mt-4 max-w-[560px] text-[15.5px] leading-[1.85] text-white/75">
               การจัดการฝาก-ถอนไม่ควรเป็นเรื่องซับซ้อน ONE2Coin
               ทำให้ทุกธุรกรรมจบได้ในระบบเดียว ไม่ต้องมีบัญชีธนาคาร
               และเริ่มใช้งานได้ทันที
             </p>
+
+            {/* Four steps in a vertical rail so they sit beside the artwork. */}
+            <ol className="mt-10 grid gap-6 sm:grid-cols-2">
+              {STEPS.map((s, i) => (
+                <li key={s.title} className="flex gap-4">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white font-display text-[14px] font-bold text-violet-deep shadow-[0_10px_24px_-8px_rgba(0,0,0,0.5)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="text-[16px] font-semibold">{s.title}</h3>
+                    <p className="mt-1.5 text-[14px] leading-[1.8] text-white/70">
+                      {s.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
 
-          {/* Connected 4-step flow — replaces the four stacked cards. */}
-          <ol className="relative mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {/* the rail the steps sit on */}
-            <span
-              aria-hidden
-              className="absolute left-0 right-0 top-5 hidden h-px bg-gradient-to-r from-white/10 via-white/40 to-white/10 lg:block"
+          {/* Real ONE2Coin wallet screen — the asset already carries its own
+              phone frame, so it only needs a soft cast shadow. */}
+          <div className="mx-auto w-full max-w-[360px] lg:max-w-none">
+            <Image
+              src="/one2coin.png"
+              alt="หน้าจอระบบ ONE2Coin"
+              width={812}
+              height={1135}
+              className="h-auto w-full drop-shadow-[0_24px_48px_rgba(0,0,0,0.32)]"
             />
-            {STEPS.map((s, i) => (
-              <li key={s.title} className="relative lg:pr-6">
-                <span className="relative z-10 grid h-10 w-10 place-items-center rounded-xl bg-white font-display text-[14px] font-bold text-violet-deep shadow-[0_10px_24px_-8px_rgba(0,0,0,0.5)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 text-[17px] font-semibold">{s.title}</h3>
-                <p className="mt-2 text-[14.5px] leading-[1.8] text-white/70">
-                  {s.body}
-                </p>
-              </li>
-            ))}
-          </ol>
+          </div>
         </div>
       </div>
     </section>

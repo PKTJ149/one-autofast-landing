@@ -6,22 +6,13 @@ const STATS = [
   { value: "24/7", label: "ทีมซัพพอร์ต" },
 ];
 
-const BARS = [42, 66, 35, 88, 54, 73, 96];
-
-const ROWS = [
-  { label: "ยอดฝากรวม", value: "฿ 2,103,221.67" },
-  { label: "สมาชิกที่ใช้งาน", value: "300", delta: "▲ 12%" },
-  { label: "ยอด ONE2Coin", value: "1,985,014" },
-  { label: "รอทำรายการถอน", value: "4" },
-];
-
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden px-6 pb-28 pt-32 lg:px-10 lg:pb-36 lg:pt-40"
+      className="relative overflow-hidden px-6 pb-20 pt-24 lg:px-10 lg:pb-24 lg:pt-28"
     >
-      <div className="relative z-10 mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative z-10 mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
         {/* ---------- copy ---------- */}
         <div>
           <div className="inline-flex items-center gap-2.5 rounded-pill border border-violet-tint bg-white/70 py-1.5 pl-2 pr-4 backdrop-blur-md">
@@ -76,40 +67,21 @@ export default function Hero() {
           </dl>
         </div>
 
-        {/* ---------- live panel ---------- */}
-        <div className="frost rounded-card p-5 sm:p-6">
-          <h2 className="font-display text-[11.5px] font-semibold uppercase tracking-[0.14em] text-ink-faint">
-            ภาพรวมแบบเรียลไทม์
-          </h2>
-
-          <div className="mt-5 flex h-24 items-end gap-2" aria-hidden>
-            {BARS.map((h, i) => (
-              <i
-                key={i}
-                style={{ height: `${h}%` }}
-                className="flex-1 rounded-t-md bg-gradient-to-b from-violet to-orange/25"
-              />
-            ))}
-          </div>
-
-          <dl className="mt-4">
-            {ROWS.map((r) => (
-              <div
-                key={r.label}
-                className="flex items-center justify-between border-b border-line-soft py-3.5 text-[14px] last:border-0"
-              >
-                <dt className="text-ink-muted">{r.label}</dt>
-                <dd className="font-display font-semibold">
-                  {r.value}
-                  {r.delta && (
-                    <span className="ml-2 text-[12.5px] text-mint">
-                      {r.delta}
-                    </span>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
+        {/* ---------- product artwork ---------- */}
+        {/* Animated SVG: CSS keyframes live inside the file and play while it
+            is loaded through <img>. next/image would need dangerouslyAllowSVG
+            and gives us nothing here, so a plain img is the simpler choice. */}
+        {/* Wider than its grid track on desktop so the artwork bleeds past the
+            container edge — the section clips it. */}
+        <div className="lg:w-[172%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero.svg"
+            alt="ตัวอย่างหน้าจอระบบหลังบ้านของ Auto Fast Track"
+            width={1600}
+            height={1188}
+            className="h-auto w-full"
+          />
         </div>
       </div>
     </section>

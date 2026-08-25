@@ -1,23 +1,41 @@
+import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
 
+/* Real member photos; the fade from left to right reads as headcount
+   dropping away. */
+const TEAM = [
+  "/avatars/avatar01.png",
+  "/avatars/avatar02.png",
+  "/avatars/avatar03.png",
+  "/avatars/avatar04.png",
+  "/avatars/avatar05.png",
+  "/avatars/avatar06.png",
+];
+
+/* Payment provider logos — horizontal lockups, transparent, 142x50. */
 const GATEWAYS = [
-  "PromptPay",
-  "TrueMoney",
-  "SCB",
-  "KBank",
-  "Crypto",
-  "USDT",
-  "+55",
+  "/gateways/gateway01.png",
+  "/gateways/gateway02.png",
+  "/gateways/gateway03.png",
+  "/gateways/gateway04.png",
+  "/gateways/gateway05.png",
+  "/gateways/gateway06.png",
+  "/gateways/gateway07.png",
 ];
 
 export default function Reasons() {
   return (
-    <section id="about" className="relative px-6 py-24 lg:px-10 lg:py-32">
+    <section id="about" className="relative px-6 pb-24 pt-16 lg:px-10 lg:pb-32 lg:pt-20">
       <div className="mx-auto max-w-[1180px]">
         <SectionHeading
+          align="stacked"
           eyebrow="4 เหตุผล"
-          title="ทำไม Auto Fast Track ถึงตอบโจทย์คุณ"
-          description="เพราะการจัดการเว็บไซต์หลายเว็บพร้อมกัน ไม่ควรเป็นเรื่องยุ่งยากอีกต่อไป"
+          title={
+            <>
+              ทำไม <span className="text-indigo">Auto Fast</span> ถึงตอบโจทย์คุณ
+            </>
+          }
+          description="เปลี่ยนความซับซ้อนของการจัดการเว็บเดิมพัน ให้กลายเป็นระบบที่ง่ายและไร้รอยต่อ ด้วย Automation จาก Auto Fast ที่ออกแบบมาเพื่อความรวดเร็ว ปลอดภัย และพร้อมรองรับทุกการเติบโต"
         />
 
         {/* Bento: 7/5 then 5/7 — an intentionally uneven rhythm instead of a
@@ -29,11 +47,15 @@ export default function Reasons() {
             หรือดูแลงานหลังบ้าน ระบบจัดการให้ทั้งหมด ทันที และแม่นยำ
             <div className="mt-7 flex items-center gap-4 rounded-2xl bg-tint p-4">
               <div className="flex -space-x-2" aria-hidden>
-                {[...Array(6)].map((_, i) => (
-                  <span
-                    key={i}
+                {TEAM.map((src, i) => (
+                  <Image
+                    key={src}
+                    src={src}
+                    alt=""
+                    width={39}
+                    height={39}
                     style={{ opacity: 1 - i * 0.15 }}
-                    className="h-8 w-8 rounded-full border-2 border-surface bg-gradient-to-br from-violet-soft to-violet"
+                    className="h-8 w-8 rounded-full border-2 border-surface object-cover"
                   />
                 ))}
               </div>
@@ -69,15 +91,25 @@ export default function Reasons() {
           >
             รองรับผู้ให้บริการชำระเงินหลายราย ทำธุรกรรมแบบเรียลไทม์
             ยืดหยุ่นสำหรับลูกค้าของคุณ ทั้งเร็ว ปลอดภัย และเชื่อถือได้
-            <div className="mt-7 flex flex-wrap gap-2">
-              {GATEWAYS.map((g) => (
+            <div className="mt-7 flex flex-wrap items-center gap-2.5">
+              {GATEWAYS.map((src) => (
                 <span
-                  key={g}
-                  className="rounded-lg border border-line bg-canvas px-3 py-1.5 font-display text-[12.5px] font-medium text-ink-muted"
+                  key={src}
+                  className="grid h-11 w-[104px] place-items-center rounded-xl border border-line bg-surface px-2"
                 >
-                  {g}
+                  <Image
+                    src={src}
+                    alt=""
+                    width={142}
+                    height={50}
+                    aria-hidden
+                    className="h-[26px] w-auto object-contain"
+                  />
                 </span>
               ))}
+              <span className="rounded-xl border border-line bg-canvas px-3 py-2.5 font-display text-[12.5px] font-medium text-ink-muted">
+                +55
+              </span>
             </div>
           </Card>
         </div>

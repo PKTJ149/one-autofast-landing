@@ -53,7 +53,7 @@ export default function Features() {
               className="card sticky mb-5 grid gap-8 rounded-card p-7 lg:grid-cols-[1fr_260px] lg:items-center lg:p-10"
             >
               <div>
-                <span className="inline-flex items-center gap-2 rounded-pill bg-orange-tint px-3 py-1 font-display text-[11.5px] font-semibold uppercase tracking-[0.12em] text-orange-deep">
+                <span className="inline-flex items-center gap-2 rounded-pill bg-orange-tint px-3.5 py-1.5 font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-orange-deep">
                   {String(i + 1).padStart(2, "0")} · {item.tag}
                 </span>
                 <h3 className="mt-4 text-[21px] font-semibold sm:text-[25px]">

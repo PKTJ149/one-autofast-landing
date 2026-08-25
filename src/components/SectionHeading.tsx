@@ -4,8 +4,12 @@ type Props = {
   eyebrow: string;
   title: ReactNode;
   description?: string;
-  /** Split lays eyebrow+title on the left and the description on the right. */
-  align?: "split" | "center";
+  /**
+   * split   — eyebrow+title left, description right
+   * stacked — everything left aligned, description under the title
+   * center  — centred column
+   */
+  align?: "split" | "stacked" | "center";
 };
 
 /**
@@ -34,6 +38,22 @@ export default function SectionHeading({
     );
   }
 
+  if (align === "stacked") {
+    return (
+      <div className="border-b border-line pb-10">
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2 className="mt-4 max-w-[760px] text-[28px] font-bold tracking-[-0.01em] sm:text-[36px]">
+          {title}
+        </h2>
+        {description && (
+          <p className="mt-4 max-w-[940px] text-[15.5px] text-ink-muted">
+            {description}
+          </p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-6 border-b border-line pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
       <div>
@@ -51,8 +71,8 @@ export default function SectionHeading({
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 font-display text-[11.5px] font-semibold uppercase tracking-[0.16em] text-violet">
-      <i className="h-1.5 w-1.5 rounded-full bg-orange" aria-hidden />
+    <span className="inline-flex items-center gap-2.5 font-display text-[14px] font-semibold uppercase tracking-[0.16em] text-violet">
+      <i className="h-2.5 w-2.5 rounded-full bg-orange" aria-hidden />
       {children}
     </span>
   );
