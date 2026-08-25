@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auto Fast Track — Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;background:#0b0b0f;color:#fff}
+  img{max-width:100%}
+
+  /* ---------- shared label bar ---------- */
+  .label{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding:14px 32px;background:#111116;border-bottom:1px solid #26262f;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .label b{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8b8b9c}
+  .label h2{font-size:19px;font-weight:700;color:#fff}
+  .label span{font-size:13px;color:#8b8b9c}
+  .swatches{display:flex;gap:6px;margin-left:auto}
+  .swatches i{width:22px;height:22px;border-radius:5px;display:block;border:1px solid rgba(255,255,255,.15)}
+
+  /* ================= A · MIDNIGHT AURORA ================= */
+  .a{
+    position:relative;overflow:hidden;
+    background:#07070c;
+    padding:96px 40px 120px;
+  }
+  .a::before{
+    content:"";position:absolute;inset:-30% -10% auto -10%;height:820px;
+    background:
+      radial-gradient(52% 46% at 22% 32%, rgba(124,58,237,.55), transparent 70%),
+      radial-gradient(46% 42% at 78% 18%, rgba(34,211,238,.35), transparent 70%),
+      radial-gradient(40% 38% at 55% 62%, rgba(236,72,153,.28), transparent 70%);
+    filter:blur(20px);
+  }
+  .a::after{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:72px 72px;
+    mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent);
+  }
+  .a-in{position:relative;z-index:2;max-width:1180px;margin:0 auto;
+        display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .a-pill{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 8px;
+    border:1px solid rgba(255,255,255,.14);border-radius:999px;
+    background:rgba(255,255,255,.05);backdrop-filter:blur(8px);
+    font-size:12.5px;letter-spacing:.03em;color:#c9c9e2}
+  .a-pill em{font-style:normal;background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    color:#07070c;font-weight:700;padding:3px 9px;border-radius:999px;font-size:11px;letter-spacing:.08em}
+  .a h1{margin:26px 0 20px;font-size:60px;line-height:1.03;letter-spacing:-.035em;font-weight:700}
+  .a h1 .grad{background:linear-gradient(96deg,#c4b5fd 10%,#22d3ee 60%,#f0abfc 95%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .a p{max-width:480px;font-size:16px;line-height:1.65;color:#a5a5be}
+  .a-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+  .btn-glow{padding:14px 26px;border-radius:12px;border:0;cursor:pointer;
+    background:linear-gradient(96deg,#7c3aed,#22d3ee);color:#fff;font-weight:600;font-size:15px;
+    box-shadow:0 12px 40px -10px rgba(124,58,237,.9)}
+  .btn-ghost{padding:14px 26px;border-radius:12px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);
+    color:#fff;font-weight:500;font-size:15px;backdrop-filter:blur(8px)}
+  .a-stats{display:flex;gap:36px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,.09)}
+  .a-stats div b{display:block;font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .a-stats div span{font-size:12.5px;color:#8484a0;letter-spacing:.02em}
+  .a-glass{border:1px solid rgba(255,255,255,.12);border-radius:20px;
+    background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));
+    backdrop-filter:blur(18px);padding:22px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+  .a-glass h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8b8bab;font-weight:600}
+  .a-row{display:flex;justify-content:space-between;align-items:center;
+    padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px}
+  .a-row:last-child{border:0}
+  .a-row span{color:#b9b9d1}
+  .a-row b{font-family:'Space Grotesk',sans-serif;font-weight:600}
+  .a-up{color:#4ade80}
+  .a-bars{display:flex;align-items:flex-end;gap:7px;height:88px;margin:18px 0 4px}
+  .a-bars i{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#a78bfa,rgba(34,211,238,.25))}
+
+  /* ================= B · EDITORIAL LIGHT ================= */
+  .b{background:#f6f4ef;color:#14140f;padding:80px 40px 100px}
+  .b-in{max-width:1180px;margin:0 auto}
+  .b-top{display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:22px;border-bottom:1px solid #14140f}
+  .b-top .mark{font-family:'Instrument Serif',serif;font-size:24px;letter-spacing:-.01em}
+  .b-top nav{display:flex;gap:28px;font-size:13.5px;color:#55554c}
+  .b-idx{display:flex;gap:10px;align-items:center;margin:44px 0 18px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8a8a7c}
+  .b-idx::after{content:"";flex:1;height:1px;background:#d8d5cb}
+  .b h1{font-family:'Instrument Serif',serif;font-weight:400;
+    font-size:78px;line-height:1.02;letter-spacing:-.02em;max-width:14ch}
+  .b h1 em{font-style:italic;color:#c2410c}
+  .b-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:end;margin-top:38px}
+  .b p{font-size:16.5px;line-height:1.7;color:#4a4a41;max-width:46ch}
+  .b-link{display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+    font-size:15px;font-weight:500;color:#14140f;border-bottom:1.5px solid #14140f;padding-bottom:4px}
+  .b-num{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #14140f;margin-top:12px}
+  .b-num div{padding:22px 0;border-bottom:1px solid #d8d5cb}
+  .b-num div:nth-child(odd){padding-right:24px;border-right:1px solid #d8d5cb}
+  .b-num div:nth-child(even){padding-left:24px}
+  .b-num b{display:block;font-family:'Instrument Serif',serif;font-size:40px;font-weight:400;line-height:1}
+  .b-num span{font-size:12.5px;color:#77776a;letter-spacing:.02em}
+  .b-frame{margin-top:56px;border:1px solid #14140f;background:#fff;padding:10px}
+  .b-frame-in{background:#efece4;height:280px;display:grid;grid-template-columns:200px 1fr;gap:10px;padding:10px}
+  .b-side{background:#fff;border:1px solid #ddd9cf;padding:14px}
+  .b-side i{display:block;height:9px;border-radius:2px;background:#e3dfd4;margin-bottom:11px}
+  .b-side i:first-child{width:60%;background:#c2410c;height:11px}
+  .b-main{display:grid;grid-template-rows:auto 1fr;gap:10px}
+  .b-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .b-kpi div{background:#fff;border:1px solid #ddd9cf;padding:12px}
+  .b-kpi b{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400}
+  .b-kpi span{display:block;font-size:10.5px;color:#8a8a7c;letter-spacing:.08em;text-transform:uppercase}
+  .b-chart{background:#fff;border:1px solid #ddd9cf;display:flex;align-items:flex-end;gap:8px;padding:14px}
+  .b-chart i{flex:1;background:#14140f}
+  .b-chart i:nth-child(3){background:#c2410c}
+
+  /* ================= C · NEO-BRUTAL GRID ================= */
+  .c{background:#e8e4d9;color:#0a0a0a;padding:0;font-family:Archivo,Inter,sans-serif}
+  .c-bar{display:flex;justify-content:space-between;align-items:center;
+    background:#0a0a0a;color:#fff;padding:12px 32px;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  .c-bar span{display:flex;gap:8px;align-items:center}
+  .c-bar em{font-style:normal;background:#d6ff3f;color:#0a0a0a;padding:3px 8px}
+  .c-in{max-width:1180px;margin:0 auto;padding:56px 40px 96px}
+  .c-tag{display:inline-block;background:#0a0a0a;color:#d6ff3f;
+    padding:6px 12px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .c h1{font-size:74px;line-height:.94;font-weight:900;letter-spacing:-.04em;
+    text-transform:uppercase;margin:22px 0 0;max-width:15ch}
+  .c h1 mark{background:#2f5cff;color:#fff;padding:0 10px;display:inline-block}
+  .c-lead{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:end;margin-top:34px}
+  .c-lead p{font-size:16px;line-height:1.6;max-width:52ch;font-weight:400}
+  .c-btn{display:block;width:100%;text-align:center;background:#2f5cff;color:#fff;
+    border:2.5px solid #0a0a0a;padding:18px;font-weight:800;font-size:16px;
+    text-transform:uppercase;letter-spacing:.04em;box-shadow:7px 7px 0 #0a0a0a;cursor:pointer}
+  .c-btn.alt{background:#d6ff3f;color:#0a0a0a;margin-top:14px;box-shadow:7px 7px 0 #0a0a0a}
+  .c-mods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px}
+  .c-mod{border:2.5px solid #0a0a0a;background:#fff;padding:20px;box-shadow:6px 6px 0 #0a0a0a}
+  .c-mod:nth-child(2){background:#d6ff3f}
+  .c-mod:nth-child(3){background:#2f5cff;color:#fff}
+  .c-mod b{display:block;font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1}
+  .c-mod span{display:block;margin-top:8px;font-size:12px;line-height:1.45;
+    text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .c-strip{margin-top:20px;border:2.5px solid #0a0a0a;background:#0a0a0a;color:#d6ff3f;
+    padding:14px 20px;display:flex;gap:40px;overflow:hidden;white-space:nowrap;
+    font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+
+  @media(max-width:900px){
+    .a-in,.b-grid,.c-lead{grid-template-columns:1fr}
+    .a h1{font-size:40px}.b h1{font-size:46px}.c h1{font-size:42px}
+    .c-mods{grid-template-columns:1fr 1fr}
+    .b-frame-in{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ A ============ -->
+<div class="label">
+  <b>Direction A</b><h2>Midnight Aurora</h2>
+  <span>พื้นดำ · แสงม่วง-ฟ้า · glass · asymmetric split + live dashboard</span>
+  <div class="swatches"><i style="background:#07070c"></i><i style="background:#7c3aed"></i><i style="background:#22d3ee"></i><i style="background:#f0abfc"></i></div>
+</div>
+<section class="a">
+  <div class="a-in">
+    <div>
+      <div class="a-pill"><em>NEW</em> The Global Standard of Online Gambling Platform</div>
+      <h1>Power up your <span class="grad">gambling business</span> — fully controlled.</h1>
+      <p>Connect every site into one backend. Work faster, cut headcount, and stay in control — no matter how many brands you run.</p>
+      <div class="a-cta">
+        <button class="btn-glow">Contact Sales</button>
+        <button class="btn-ghost">See the platform ↗</button>
+      </div>
+      <div class="a-stats">
+        <div><b>1,000+</b><span>Trusted operators</span></div>
+        <div><b>60+</b><span>Payment gateways</span></div>
+        <div><b>24/7</b><span>Live support</span></div>
+      </div>
+    </div>
+    <div class="a-glass">
+      <h4>Live Overview</h4>
+      <div class="a-bars">
+        <i style="height:42%"></i><i style="height:66%"></i><i style="height:35%"></i>
+        <i style="height:88%"></i><i style="height:54%"></i><i style="height:73%"></i><i style="height:96%"></i>
+      </div>
+      <div class="a-row"><span>Total deposit</span><b>฿ 2,103,221.67</b></div>
+      <div class="a-row"><span>Active members</span><b>300 <span class="a-up">▲ 12%</span></b></div>
+      <div class="a-row"><span>ONE2Coin balance</span><b>1,985,014</b></div>
+      <div class="a-row"><span>Pending withdrawals</span><b>4</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<div class="label">
+  <b>Direction B</b><h2>Editorial Light</h2>
+  <span>กระดาษครีม · serif ตัวใหญ่ · เส้นบาง · numbered index + framed product</span>
+  <div class="swatches"><i style="background:#f6f4ef"></i><i style="background:#14140f"></i><i style="background:#c2410c"></i><i style="background:#d8d5cb"></i></div>
+</div>
+<section class="b">
+  <div class="b-in">
+    <div class="b-top">
+      <div class="mark">Auto Fast Track</div>
+      <nav><span>About</span><span>Features</span><span>Themes</span><span>Products</span><span>Packages</span></nav>
+    </div>
+    <div class="b-idx">01 — The Platform</div>
+    <h1>Fast-track growth, <em>all in one place.</em></h1>
+    <div class="b-grid">
+      <div>
+        <p>Simplify the way you manage gambling websites. Auto Fast Track connects every site into a single backend — so your team works faster, spends less, and never loses control.</p>
+        <a class="b-link">Contact us <span>→</span></a>
+      </div>
+      <div class="b-num">
+        <div><b>1,000+</b><span>Operators onboard</span></div>
+        <div><b>60+</b><span>Payment gateways</span></div>
+        <div><b>24/7</b><span>Support coverage</span></div>
+        <div><b>93%</b><span>Best sport rate</span></div>
+      </div>
+    </div>
+    <div class="b-frame">
+      <div class="b-frame-in">
+        <div class="b-side"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="b-main">
+          <div class="b-kpi">
+            <div><span>Deposit</span><b>฿2.10M</b></div>
+            <div><span>Members</span><b>300</b></div>
+            <div><span>Coin</span><b>1.98M</b></div>
+          </div>
+          <div class="b-chart">
+            <i style="height:40%"></i><i style="height:65%"></i><i style="height:92%"></i>
+            <i style="height:52%"></i><i style="height:74%"></i><i style="height:33%"></i><i style="height:60%"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<div class="label">
+  <b>Direction C</b><h2>Neo-Brutal Grid</h2>
+  <span>ครีม+น้ำเงิน+เขียวมะนาว · ขอบหนา เงาแข็ง · module grid + ticker</span>
+  <div class="swatches"><i style="background:#e8e4d9"></i><i style="background:#0a0a0a"></i><i style="background:#2f5cff"></i><i style="background:#d6ff3f"></i></div>
+</div>
+<section class="c">
+  <div class="c-bar">
+    <span>Auto Fast Track</span>
+    <span><em>24/7</em> Talk to sales</span>
+  </div>
+  <div class="c-in">
+    <div class="c-tag">All-in-one backend</div>
+    <h1>Run every site <mark>from one</mark> control room.</h1>
+    <div class="c-lead">
+      <p>Stop juggling systems, teams and databases. Consolidate all your websites, brands and projects into one platform — faster ops, fewer people, total control.</p>
+      <div>
+        <button class="c-btn">Contact sales</button>
+        <button class="c-btn alt">See packages</button>
+      </div>
+    </div>
+    <div class="c-mods">
+      <div class="c-mod"><b>1,000+</b><span>Operators trust us</span></div>
+      <div class="c-mod"><b>60+</b><span>Payment gateways</span></div>
+      <div class="c-mod"><b>93%</b><span>Top sport rate</span></div>
+      <div class="c-mod"><b>0</b><span>Bank needed · ONE2Coin</span></div>
+    </div>
+    <div class="c-strip">
+      <span>ONE2COIN</span><span>◆</span><span>AFFILIATE</span><span>◆</span><span>MINI GAMES</span><span>◆</span>
+      <span>FORTUNE WHEEL</span><span>◆</span><span>LOTTERY</span><span>◆</span><span>REWARD STORE</span><span>◆</span><span>PROMOTIONS</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

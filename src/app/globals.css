@@ -1,26 +1,218 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Auto Fast Track — "Violet Dawn" design tokens (light)
+   ============================================================ */
+
+@theme {
+  /* --- surfaces (page → raised) --- */
+  --color-canvas: #fbfaff;
+  --color-surface: #ffffff;
+  --color-tint: #f5f1ff;
+  --color-line: #e9e4f7;
+  --color-line-soft: #f1edfb;
+
+  /* --- text --- */
+  --color-ink: #17102e;
+  --color-ink-muted: #6b6386;
+  --color-ink-faint: #9d95b4;
+
+  /* --- brand --- */
+  --color-violet: #7c3aed;
+  --color-violet-deep: #5b21b6;
+  --color-violet-soft: #a78bfa;
+  --color-violet-tint: #ede6ff;
+
+  /* deeper, bluer violet used for headline accents and badges */
+  --color-indigo: #603ce3;
+
+  /* dedicated CTA colour — brighter than the brand orange */
+  --color-cta: #ff7221;
+
+  --color-orange: #ff6b2c;
+  --color-orange-deep: #e04f10;
+  --color-orange-soft: #ffa06b;
+  --color-orange-tint: #fff0e7;
+
+  --color-mint: #10b981;
+
+  /* --- type --- */
+  --font-sans: var(--font-thai), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-thai), sans-serif;
+
+  /* --- rhythm --- */
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Thai needs more vertical room than Latin — vowels stack above and below the
+   baseline, so tight leading clips them. These defaults apply site-wide. */
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+p {
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   Reusable primitives
+   ============================================================ */
+
+/* Soft brand blooms used as a section backdrop */
+.aurora {
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 780px;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 44% at 20% 30%, rgb(124 58 237 / 0.20), transparent 70%),
+    radial-gradient(44% 40% at 80% 16%, rgb(255 107 44 / 0.18), transparent 70%),
+    radial-gradient(38% 36% at 55% 62%, rgb(167 139 250 / 0.18), transparent 70%);
+  filter: blur(24px);
+}
+
+/* ------------------------------------------------------------
+   Fixed page backdrop
+   Sits behind every section and stays put while the page scrolls,
+   so the glow and grid never slide away with the content.
+   ------------------------------------------------------------ */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* soft brand blooms */
+.page-bg::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 130vh;
+  background:
+    radial-gradient(46% 40% at 18% 20%, rgb(124 58 237 / 0.20), transparent 70%),
+    radial-gradient(42% 38% at 82% 10%, rgb(255 107 44 / 0.17), transparent 70%),
+    radial-gradient(38% 34% at 55% 52%, rgb(167 139 250 / 0.16), transparent 70%);
+  filter: blur(24px);
+}
+
+/* technical grid, faded towards the edges */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(23 16 46 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(23 16 46 / 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(85% 75% at 50% 40%, #000, transparent);
+}
+
+/* Faint technical grid, faded at the edges */
+.grid-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(23 16 46 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(23 16 46 / 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(70% 60% at 50% 30%, #000, transparent);
+}
+
+/* Raised white card */
+.card {
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  box-shadow:
+    0 1px 2px rgb(23 16 46 / 0.04),
+    0 24px 60px -28px rgb(91 33 182 / 0.28);
+}
+
+/* Frosted panel that lets the aurora show through */
+.frost {
+  border: 1px solid rgb(255 255 255 / 0.9);
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 70px -30px rgb(91 33 182 / 0.35);
+}
+
+/* Brand gradient text */
+.text-brand {
+  background: linear-gradient(96deg, #7c3aed 5%, #a855f7 45%, #ff6b2c 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 1px gradient hairline used to separate sections */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(124 58 237 / 0.35),
+    rgb(255 107 44 / 0.35),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Marquee — infinite horizontal scroll
+   The track holds the same list twice, so translating it -50%
+   lands exactly where it started and the loop is seamless.
+   ============================================================ */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+  animation: marquee-left 46s linear infinite;
+}
+.marquee-track.reverse {
+  animation-name: marquee-right;
+  animation-duration: 58s;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }

@@ -1,0 +1,116 @@
+import SectionHeading from "@/components/SectionHeading";
+
+const GATEWAYS = [
+  "PromptPay",
+  "TrueMoney",
+  "SCB",
+  "KBank",
+  "Crypto",
+  "USDT",
+  "+55",
+];
+
+export default function Reasons() {
+  return (
+    <section id="about" className="relative px-6 py-24 lg:px-10 lg:py-32">
+      <div className="mx-auto max-w-[1180px]">
+        <SectionHeading
+          eyebrow="4 เหตุผล"
+          title="ทำไม Auto Fast Track ถึงตอบโจทย์คุณ"
+          description="เพราะการจัดการเว็บไซต์หลายเว็บพร้อมกัน ไม่ควรเป็นเรื่องยุ่งยากอีกต่อไป"
+        />
+
+        {/* Bento: 7/5 then 5/7 — an intentionally uneven rhythm instead of a
+            row of four identical cards. */}
+        <div className="mt-10 grid gap-4 lg:grid-cols-12">
+          {/* 01 — large */}
+          <Card className="lg:col-span-7" num="01" title="ลดจำนวนคน แต่ยังคุมได้เหมือนเดิม">
+            ไม่ต้องจ้างทีมใหญ่มานั่งตรวจสอบรางวัล คำนวณแต้ม
+            หรือดูแลงานหลังบ้าน ระบบจัดการให้ทั้งหมด ทันที และแม่นยำ
+            <div className="mt-7 flex items-center gap-4 rounded-2xl bg-tint p-4">
+              <div className="flex -space-x-2" aria-hidden>
+                {[...Array(6)].map((_, i) => (
+                  <span
+                    key={i}
+                    style={{ opacity: 1 - i * 0.15 }}
+                    className="h-8 w-8 rounded-full border-2 border-surface bg-gradient-to-br from-violet-soft to-violet"
+                  />
+                ))}
+              </div>
+              <p className="text-[13px] leading-snug text-ink-muted">
+                ทีมหลังบ้าน{" "}
+                <b className="font-display text-ink line-through decoration-orange decoration-2">
+                  12
+                </b>{" "}
+                คน เหลือเพียง{" "}
+                <b className="font-display text-[18px] text-violet-deep">2</b> คน
+              </p>
+            </div>
+          </Card>
+
+          {/* 02 */}
+          <Card className="lg:col-span-5" num="02" title="ตัดงานซ้ำซากออกไปให้หมด">
+            เลิกทำงานมือทุกวัน ทั้งเช็คโปรโมชั่นและบันทึกข้อมูล
+            แดชบอร์ดช่วยให้ทำงานเร็วขึ้น เจอข้อผิดพลาดไว
+            และเห็นทุกอย่างจบในหน้าเดียว
+          </Card>
+
+          {/* 03 */}
+          <Card className="lg:col-span-5" num="03" title="ต้นทุนต่ำลง ควบคุมได้มากขึ้น">
+            ลดต้นทุนคงที่ แล้วนำเงินส่วนนั้นไปลงทุนขยายธุรกิจแทน
+            บริหารงานได้มีประสิทธิภาพและทำกำไรได้มากขึ้น
+          </Card>
+
+          {/* 04 — large */}
+          <Card
+            className="lg:col-span-7"
+            num="04"
+            title="เชื่อมต่อ Payment Gateway ระดับมืออาชีพ"
+          >
+            รองรับผู้ให้บริการชำระเงินหลายราย ทำธุรกรรมแบบเรียลไทม์
+            ยืดหยุ่นสำหรับลูกค้าของคุณ ทั้งเร็ว ปลอดภัย และเชื่อถือได้
+            <div className="mt-7 flex flex-wrap gap-2">
+              {GATEWAYS.map((g) => (
+                <span
+                  key={g}
+                  className="rounded-lg border border-line bg-canvas px-3 py-1.5 font-display text-[12.5px] font-medium text-ink-muted"
+                >
+                  {g}
+                </span>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Card({
+  num,
+  title,
+  children,
+  className = "",
+}: {
+  num: string;
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <article
+      className={`card group rounded-card p-7 transition-shadow hover:shadow-[0_1px_2px_rgba(23,16,46,0.04),0_28px_70px_-30px_rgba(91,33,182,0.45)] ${className}`}
+    >
+      <div className="flex items-baseline gap-3">
+        <span className="font-display text-[13px] font-bold tracking-[0.08em] text-orange">
+          {num}
+        </span>
+        <span className="h-px flex-1 bg-line" aria-hidden />
+      </div>
+      <h3 className="mt-4 text-[19px] font-semibold sm:text-[21px]">{title}</h3>
+      <div className="mt-3 text-[15px] leading-[1.8] text-ink-muted">
+        {children}
+      </div>
+    </article>
+  );
+}
