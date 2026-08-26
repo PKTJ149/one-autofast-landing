@@ -44,8 +44,8 @@ export type MorphCard = {
 
 type Phase = "scatter" | "line" | "circle";
 
-const CARD_W = 68;
-const CARD_H = 132;
+const CARD_W = 66;
+const CARD_H = 143;
 const CIRCLE_SCALE = 1.15;
 
 const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;

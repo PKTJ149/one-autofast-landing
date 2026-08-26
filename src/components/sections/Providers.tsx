@@ -4,11 +4,11 @@ import { useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 
 /**
- * `logo` is an optional path under /public (e.g. "/logos/pg.png").
- * When it is missing the tile falls back to a monogram, so real logo files can
- * be dropped in one at a time without touching the layout.
+ * Logos come straight from the design hand-off, one folder per category.
+ * Some are white artwork meant for a dark surface — those are flagged
+ * `onDark` so the tile behind them flips to the ink colour.
  */
-type Provider = { name: string; logo?: string };
+type Provider = { name: string; logo: string; onDark?: boolean };
 type Group = { key: string; label: string; note: string; items: Provider[] };
 
 const GROUPS: Group[] = [
@@ -17,11 +17,14 @@ const GROUPS: Group[] = [
     label: "กีฬา",
     note: "ครบทุกลีกดัง ทั้งฟุตบอล บาสเกตบอล และมวย",
     items: [
-      { name: "LSM99 Sport" },
-      { name: "Sbobet" },
-      { name: "SABA Sport" },
-      { name: "3 Sing" },
-      { name: "Muay Puk Yok" },
+        { name: "3 Sing", logo: "/providers/sport/3sing.png", onDark: true },
+        { name: "CMD", logo: "/providers/sport/cmd.png" },
+        { name: "LSM Sport", logo: "/providers/sport/lsmsport.png", onDark: true },
+        { name: "ONE-BX", logo: "/providers/sport/onebx.png", onDark: true },
+        { name: "ONE-BX All New", logo: "/providers/sport/onebxallnew.png" },
+        { name: "SABA Sports", logo: "/providers/sport/sabasports.png" },
+        { name: "Sbobet", logo: "/providers/sport/sbobet.png" },
+        { name: "Sport LSM", logo: "/providers/sport/sportlsm.png", onDark: true },
     ],
   },
   {
@@ -29,21 +32,26 @@ const GROUPS: Group[] = [
     label: "คาสิโน",
     note: "ถ่ายทอดสดจากสตูดิโอจริง ครบทุกเกมโต๊ะ",
     items: [
-      { name: "Evolution" },
-      { name: "Sexy Baccarat" },
-      { name: "Pretty Gaming" },
-      { name: "SA Baccarat" },
-      { name: "DG Gaming" },
-      { name: "WM Casino" },
-      { name: "ALLBET" },
-      { name: "Playtech Casino" },
-      { name: "XG Casino" },
-      { name: "World Entertainment" },
-      { name: "Pragmatic Play" },
-      { name: "Skywind" },
-      { name: "Big Gaming" },
-      { name: "W Casino" },
-      { name: "YeeBet" },
+        { name: "AE Gaming", logo: "/providers/casino/ae-gaming.png" },
+        { name: "Astar", logo: "/providers/casino/astar.png", onDark: true },
+        { name: "BG", logo: "/providers/casino/bg.png" },
+        { name: "Casino Game", logo: "/providers/casino/casinogame.png" },
+        { name: "Dream Gaming", logo: "/providers/casino/dreamgaming.png" },
+        { name: "eBET", logo: "/providers/casino/ebet.png" },
+        { name: "Evolution", logo: "/providers/casino/evolution.png", onDark: true },
+        { name: "KA Gaming", logo: "/providers/casino/kagaming.png" },
+        { name: "Mango Play", logo: "/providers/casino/mangoplay.png", onDark: true },
+        { name: "Playtech ONE", logo: "/providers/casino/playtechone.png", onDark: true },
+        { name: "Pragmatic Play", logo: "/providers/casino/pragmaticplay.png" },
+        { name: "Pretty Gaming", logo: "/providers/casino/prettygaming.png" },
+        { name: "SA Gaming", logo: "/providers/casino/sa-gaming.png" },
+        { name: "Sexy Baccarat", logo: "/providers/casino/sexybaccarat.png" },
+        { name: "Skywind Group", logo: "/providers/casino/skywind-group.png" },
+        { name: "Vivo Gaming", logo: "/providers/casino/vivogaming.png" },
+        { name: "W Casino", logo: "/providers/casino/wcasino.png" },
+        { name: "WM Casino", logo: "/providers/casino/wmcasino.png" },
+        { name: "World Entertainment", logo: "/providers/casino/world-entertainment.png" },
+        { name: "YB Live", logo: "/providers/casino/yblive.png", onDark: true },
     ],
   },
   {
@@ -51,26 +59,49 @@ const GROUPS: Group[] = [
     label: "เกม & สล็อต",
     note: "ค่ายสล็อตยอดนิยม อัปเดตเกมใหม่ต่อเนื่อง",
     items: [
-      { name: "PG" },
-      { name: "JILI" },
-      { name: "Joker Gaming" },
-      { name: "Pragmatic Play" },
-      { name: "NAGA GAMES" },
-      { name: "Spadegaming" },
-      { name: "MICRO GAMING" },
-      { name: "HABANERO" },
-      { name: "Relax Gaming" },
-      { name: "KA Gaming" },
-      { name: "Evoplay" },
-      { name: "YGG Drasil" },
-      { name: "RICH88" },
-      { name: "Fast Spin" },
-      { name: "MegaWin" },
-      { name: "PLAYTECH" },
-      { name: "Next Spin" },
-      { name: "SIMPLE PLAY" },
-      { name: "KINGMAKER" },
-      { name: "Play Star" },
+        { name: "10 1", logo: "/providers/slot/10-1.png" },
+        { name: "FC Fachai", logo: "/providers/slot/fc-fachai.png" },
+        { name: "ABI Game", logo: "/providers/slot/abigame.png" },
+        { name: "Alize", logo: "/providers/slot/alize.png", onDark: true },
+        { name: "AllBet", logo: "/providers/slot/allbet.png", onDark: true },
+        { name: "Amigo", logo: "/providers/slot/amigo.png" },
+        { name: "ANB Slot", logo: "/providers/slot/anbslot.png", onDark: true },
+        { name: "AP Advant Play", logo: "/providers/slot/apadvantplay.png" },
+        { name: "BlackAnt", logo: "/providers/slot/blackant.png" },
+        { name: "BNG", logo: "/providers/slot/bng.png", onDark: true },
+        { name: "BT Gaming", logo: "/providers/slot/btgaming.png", onDark: true },
+        { name: "Cherry Gaming", logo: "/providers/slot/cherrygaming.png" },
+        { name: "Dragon Soft", logo: "/providers/slot/dragon-soft.png" },
+        { name: "EpicWin", logo: "/providers/slot/epicwin.png" },
+        { name: "Fastspin", logo: "/providers/slot/fastspin.png", onDark: true },
+        { name: "Funky Games", logo: "/providers/slot/funky-games.png" },
+        { name: "Galaxsys", logo: "/providers/slot/galaxsys.png" },
+        { name: "Gameplay Interactive", logo: "/providers/slot/gameplayinteractive.png" },
+        { name: "Habanero", logo: "/providers/slot/habanero.png" },
+        { name: "Hotdog", logo: "/providers/slot/hotdog.png" },
+        { name: "JILI", logo: "/providers/slot/jili.png" },
+        { name: "Joker", logo: "/providers/slot/joker.png" },
+        { name: "Kingmaker", logo: "/providers/slot/kingmaker.png" },
+        { name: "MegaWin", logo: "/providers/slot/megawin.png" },
+        { name: "Microgaming", logo: "/providers/slot/microgaming.png" },
+        { name: "MP Poke", logo: "/providers/slot/mp-poke.png", onDark: true },
+        { name: "Naga", logo: "/providers/slot/naga.png" },
+        { name: "Next Spin", logo: "/providers/slot/nextspin.png" },
+        { name: "Nolimit", logo: "/providers/slot/nolimit.png" },
+        { name: "PG 1", logo: "/providers/slot/pg-1.png" },
+        { name: "PG", logo: "/providers/slot/pg.png" },
+        { name: "Play Star", logo: "/providers/slot/playstar.png" },
+        { name: "RB7 Slot", logo: "/providers/slot/rb7slot.png", onDark: true },
+        { name: "Red Tiger", logo: "/providers/slot/red-tiger.png" },
+        { name: "Relax", logo: "/providers/slot/relax.png" },
+        { name: "Rich88", logo: "/providers/slot/rich88.png" },
+        { name: "Simple Play", logo: "/providers/slot/simpleplay.png" },
+        { name: "Spadegaming", logo: "/providers/slot/spadegaming.png" },
+        { name: "Titan", logo: "/providers/slot/titan.png" },
+        { name: "UU Slot", logo: "/providers/slot/uu-slot.png" },
+        { name: "V Plus", logo: "/providers/slot/vplus.png" },
+        { name: "Xpanse", logo: "/providers/slot/xpanse.png" },
+        { name: "Xtreme Gaming", logo: "/providers/slot/xtreme-gasming.png" },
     ],
   },
   {
@@ -78,22 +109,34 @@ const GROUPS: Group[] = [
     label: "หวย & คีโน",
     note: "รองรับทุกรูปแบบการแทง ทั้งไทยและต่างประเทศ",
     items: [
-      { name: "LSM LOTTO" },
-      { name: "LOTTO EXIT" },
-      { name: "จับยี่กี" },
-      { name: "หวยรัฐบาลไทย" },
-      { name: "GPI GAMING" },
-      { name: "QQ KENO" },
+        { name: "F1 Lotto", logo: "/providers/lotto/f1lotto.png", onDark: true },
+        { name: "Lam Lotto", logo: "/providers/lotto/lamlotto.png" },
+        { name: "Lotto Exit", logo: "/providers/lotto/lottoexit.png" },
+        { name: "Lotto Plus", logo: "/providers/lotto/lottoplus.png" },
+        { name: "LSM99 Lotto", logo: "/providers/lotto/lsm99lotto.png", onDark: true },
+        { name: "My Lotto", logo: "/providers/lotto/mylotto.png" },
+        { name: "ONE Lotto", logo: "/providers/lotto/onelotto.png" },
+        { name: "QQ Keno", logo: "/providers/lotto/qqkeno.png" },
     ],
   },
 ];
+
+/* An "all" tab derived from the others, so it can never drift out of sync. */
+const ALL: Group = {
+  key: "all",
+  label: "ทั้งหมด",
+  note: "ทุกค่ายที่เชื่อมต่อกับระบบ ครบทั้งกีฬา คาสิโน เกมสล็อต และหวย",
+  items: GROUPS.flatMap((g) => g.items),
+};
+
+const TABS: Group[] = [ALL, ...GROUPS];
 
 const PREVIEW = 12;
 
 export default function Providers() {
   const [active, setActive] = useState(0);
   const [expanded, setExpanded] = useState(false);
-  const group = GROUPS[active];
+  const group = TABS[active];
   const items = expanded ? group.items : group.items.slice(0, PREVIEW);
   const total = GROUPS.reduce((n, g) => n + g.items.length, 0);
 
@@ -108,7 +151,7 @@ export default function Providers() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[300px_1fr]">
           {/* category summary */}
-          <div className="relative overflow-hidden rounded-card bg-gradient-to-br from-violet-deep to-violet p-7 text-white">
+          <div className="relative overflow-hidden rounded-card bg-gradient-to-br from-violet-deep to-violet p-7 text-center text-white lg:text-left">
             <div
               aria-hidden
               className="pointer-events-none absolute -right-10 -top-12 h-48 w-48 rounded-full bg-orange/40 blur-2xl"
@@ -132,8 +175,8 @@ export default function Providers() {
 
           {/* provider grid */}
           <div className="card rounded-card p-6 sm:p-7">
-            <div className="flex flex-wrap gap-2">
-              {GROUPS.map((g, i) => {
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+              {TABS.map((g, i) => {
                 const on = i === active;
                 return (
                   <button
@@ -158,13 +201,22 @@ export default function Providers() {
             <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
               {items.map((p) => (
                 <li
-                  key={p.name}
-                  className="flex items-center gap-3 rounded-xl border border-line bg-canvas px-3.5 py-3 transition-colors hover:border-violet-soft hover:bg-violet-tint"
+                  key={p.logo}
+                  className={`grid h-16 place-items-center rounded-xl border px-3 transition-colors ${
+                    p.onDark
+                      ? "border-ink/15 bg-ink hover:border-violet-soft"
+                      : "border-line bg-canvas hover:border-violet-soft hover:bg-violet-tint"
+                  }`}
                 >
-                  <ProviderLogo provider={p} />
-                  <span className="truncate text-[14px] font-medium">
-                    {p.name}
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    width={216}
+                    height={80}
+                    loading="lazy"
+                    className="max-h-10 w-auto max-w-full object-contain"
+                  />
                 </li>
               ))}
             </ul>
@@ -183,36 +235,5 @@ export default function Providers() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ProviderLogo({ provider }: { provider: Provider }) {
-  if (provider.logo) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={provider.logo}
-        alt={provider.name}
-        width={36}
-        height={36}
-        className="h-9 w-9 shrink-0 rounded-lg object-contain"
-      />
-    );
-  }
-
-  /* Fallback monogram — first letter of each of the first two words. */
-  const initials = provider.name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("");
-
-  return (
-    <span
-      aria-hidden
-      className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-line bg-surface font-display text-[13px] font-bold text-violet-deep"
-    >
-      {initials}
-    </span>
   );
 }

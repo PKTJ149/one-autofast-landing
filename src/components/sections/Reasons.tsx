@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
+import ShineBorder from "@/components/ui/shine-border";
 
 /* Real member photos; the fade from left to right reads as headcount
    dropping away. */
@@ -45,7 +46,7 @@ export default function Reasons() {
           <Card className="lg:col-span-7" num="01" title="ลดจำนวนคน แต่ยังคุมได้เหมือนเดิม">
             ไม่ต้องจ้างทีมใหญ่มานั่งตรวจสอบรางวัล คำนวณแต้ม
             หรือดูแลงานหลังบ้าน ระบบจัดการให้ทั้งหมด ทันที และแม่นยำ
-            <div className="mt-7 flex items-center gap-4 rounded-2xl bg-tint p-4">
+            <div className="mt-7 flex flex-col items-center gap-4 rounded-2xl bg-tint p-4 sm:flex-row">
               <div className="flex -space-x-2" aria-hidden>
                 {TEAM.map((src, i) => (
                   <Image
@@ -91,7 +92,7 @@ export default function Reasons() {
           >
             รองรับผู้ให้บริการชำระเงินหลายราย ทำธุรกรรมแบบเรียลไทม์
             ยืดหยุ่นสำหรับลูกค้าของคุณ ทั้งเร็ว ปลอดภัย และเชื่อถือได้
-            <div className="mt-7 flex flex-wrap items-center gap-2.5">
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5 lg:justify-start">
               {GATEWAYS.map((src) => (
                 <span
                   key={src}
@@ -131,16 +132,18 @@ function Card({
 }) {
   return (
     <article
-      className={`card group rounded-card p-7 transition-shadow hover:shadow-[0_1px_2px_rgba(23,16,46,0.04),0_28px_70px_-30px_rgba(91,33,182,0.45)] ${className}`}
+      className={`card group relative overflow-hidden rounded-card p-7 text-center transition-shadow lg:text-left hover:shadow-[0_1px_2px_rgba(23,16,46,0.04),0_28px_70px_-30px_rgba(91,33,182,0.45)] ${className}`}
     >
-      <div className="flex items-baseline gap-3">
+      <ShineBorder borderWidth={2} shineColor={["#7c3aed", "#ff7221"]} />
+
+      <div className="relative flex items-baseline gap-3 text-left">
         <span className="font-display text-[13px] font-bold tracking-[0.08em] text-orange">
           {num}
         </span>
         <span className="h-px flex-1 bg-line" aria-hidden />
       </div>
-      <h3 className="mt-4 text-[19px] font-semibold sm:text-[21px]">{title}</h3>
-      <div className="mt-3 text-[15px] leading-[1.8] text-ink-muted">
+      <h3 className="relative mt-4 text-[19px] font-semibold sm:text-[21px]">{title}</h3>
+      <div className="relative mt-3 text-[15px] leading-[1.8] text-ink-muted">
         {children}
       </div>
     </article>

@@ -9,7 +9,6 @@ type Tab = {
   label: string;
   title: string;
   body: string;
-  metrics: { label: string; value: string }[];
   /** Screenshot of this screen, 932x555. Drop the file in /public/systems
    *  and set the path here; until then the panel shows a sized placeholder. */
   image?: string;
@@ -22,11 +21,6 @@ const TABS: Tab[] = [
     label: "จัดการหลังบ้าน",
     title: "ระบบบริหารหลังบ้านทุกเว็บด้วยเว็บเดียว (All in one backend management)",
     body: "หมดปัญหากับการดูแลหลายระบบ หลายหลังบ้าน หลายฐานข้อมูล ที่ต้องแยกทีม แยกบัญชี ด้วยระบบของเรา ทำให้ทุกเว็บไซต์ ทุกแบรนด์ หรือทุกโปรเจกต์ จะถูกรวบรวมไว้ในที่เดียว",
-    metrics: [
-      { label: "เว็บไซต์ที่เชื่อมต่อ", value: "18" },
-      { label: "แบรนด์", value: "5" },
-      { label: "อัปไทม์", value: "99.9%" },
-    ],
   },
   {
     key: "finance",
@@ -34,11 +28,6 @@ const TABS: Tab[] = [
     label: "ระบบการเงิน",
     title: "ระบบการจัดการการเงิน (Financial Management)",
     body: "จัดการการเงินของคุณได้อย่างง่ายดาย ครบทุกฟังก์ชัน ทั้งรายรับ รายจ่าย รายงานผลแบบเรียลไทม์ พร้อมความปลอดภัยสูงสุด!",
-    metrics: [
-      { label: "ยอดฝากวันนี้", value: "฿2.10M" },
-      { label: "ยอดถอนวันนี้", value: "฿1.44M" },
-      { label: "กำไรสุทธิ", value: "+18%" },
-    ],
   },
   {
     key: "affiliate",
@@ -46,11 +35,6 @@ const TABS: Tab[] = [
     label: "ระบบแนะนำเพื่อน",
     title: "ระบบแนะนำเพื่อน (Affiliate Program)",
     body: "เพิ่มความสนุกพร้อมรายได้ ด้วยระบบแนะนำเพื่อน รับค่าคอมมิชชันได้ง่าย ๆ ในทุกการเชิญชวน ทั้งยอดเทิร์นโอเวอร์ และการแนะนำเพื่อนเองก็ได้ด้วย",
-    metrics: [
-      { label: "พันธมิตรทั้งหมด", value: "1,204" },
-      { label: "สมาชิกใหม่", value: "312" },
-      { label: "คอมมิชชั่นจ่ายแล้ว", value: "฿486K" },
-    ],
   },
   {
     key: "promo",
@@ -58,11 +42,6 @@ const TABS: Tab[] = [
     label: "จัดการโปรโมชั่น",
     title: "ระบบจัดการโปรโมชั่น (Promotions Management)",
     body: "สร้างและปรับแต่งโปรโมชั่นได้ง่าย ๆ ทุกแคมเปญ จัดการได้ครบถ้วนและตอบโจทย์ทุกการตลาด ตั้งค่าได้หลากหลาย ตอบรับทุกรูปแบบการตลาด ไม่ตกแม้กระแสเทรนด์ต่าง ๆ ที่มาแรง",
-    metrics: [
-      { label: "แคมเปญที่ใช้งาน", value: "27" },
-      { label: "อัตราเข้าร่วม", value: "64%" },
-      { label: "รูปแบบโปรโมชั่น", value: "40+" },
-    ],
   },
   {
     key: "staff",
@@ -70,11 +49,6 @@ const TABS: Tab[] = [
     label: "จัดการพนักงาน",
     title: "ระบบจัดการพนักงาน (Employee Management)",
     body: "บริหารทีมงานได้อย่างมืออาชีพด้วยระบบจัดการพนักงานที่ครบวงจร พร้อมทั้งติดตามประสิทธิภาพการทำงานได้ง่ายดาย!",
-    metrics: [
-      { label: "พนักงานในระบบ", value: "36" },
-      { label: "ระดับสิทธิ์", value: "8" },
-      { label: "งานที่ปิดวันนี้", value: "241" },
-    ],
   },
 ];
 
@@ -131,29 +105,15 @@ export default function SystemTabs() {
           {/* panel */}
           <div
             role="tabpanel"
-            className="card rounded-card p-7 lg:p-10"
+            className="card rounded-card p-7 text-center lg:p-10 lg:text-left"
             key={tab.key}
           >
             <h3 className="text-[21px] font-semibold sm:text-[24px]">
               {tab.title}
             </h3>
-            <p className="mt-3 max-w-[620px] text-[15.5px] text-ink-muted">
+            <p className="mx-auto mt-3 max-w-[620px] text-[15.5px] text-ink-muted lg:mx-0">
               {tab.body}
             </p>
-
-            <dl className="mt-8 grid gap-3 sm:grid-cols-3">
-              {tab.metrics.map((m) => (
-                <div
-                  key={m.label}
-                  className="rounded-2xl bg-tint px-5 py-4"
-                >
-                  <dt className="text-[12.5px] text-ink-muted">{m.label}</dt>
-                  <dd className="mt-1 font-display text-[24px] font-bold text-violet-deep">
-                    {m.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
 
             {/* Screenshot slot — 932x554 */}
             {tab.image ? (

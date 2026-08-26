@@ -55,14 +55,14 @@ export default function Features() {
               style={{ top: `${7 + i * 0.9}rem` }}
               className="card sticky mb-5 grid gap-8 rounded-card p-7 lg:grid-cols-[1fr_420px] lg:items-center lg:p-10"
             >
-              <div>
+              <div className="text-center lg:text-left">
                 <span className="inline-flex items-center gap-2 rounded-pill bg-orange-tint px-3.5 py-1.5 font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-orange-deep">
                   {String(i + 1).padStart(2, "0")} · {item.tag}
                 </span>
                 <h3 className="mt-4 text-[21px] font-semibold sm:text-[25px]">
                   {item.title}
                 </h3>
-                <p className="mt-3 max-w-[560px] text-[15.5px] text-ink-muted">
+                <p className="mx-auto mt-3 max-w-[560px] text-[15.5px] text-ink-muted lg:mx-0">
                   {item.body}
                 </p>
               </div>

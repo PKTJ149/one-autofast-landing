@@ -2,20 +2,44 @@ import ScrollMorphHero, {
   type MorphCard,
 } from "@/components/ui/scroll-morph-hero";
 
-/* The five themes, repeated to fill the ring. Add `image` to any entry once a
-   real theme screenshot lands in /public/themes. */
-const THEMES = [
-  { id: "midnight", label: "Midnight", bg: "#0d0b1a", from: "#7c3aed", to: "#22d3ee" },
-  { id: "sunset", label: "Sunset", bg: "#1a0f0a", from: "#ff6b2c", to: "#ffc46b" },
-  { id: "luxe", label: "Luxe Gold", bg: "#100f0c", from: "#d4af37", to: "#8a6f1f" },
-  { id: "ocean", label: "Ocean", bg: "#04121c", from: "#0ea5e9", to: "#34d399" },
-  { id: "daylight", label: "Daylight", bg: "#f4f2fb", from: "#7c3aed", to: "#ff6b2c", light: true },
+/* Real theme screenshots, 430x932. Filenames keep the numbering from the
+   design hand-off, so gaps (12, 13, 17) are expected. */
+const FILES = [
+  "theme01.png",
+  "theme02.png",
+  "theme03.png",
+  "theme04.png",
+  "theme05.png",
+  "theme06.png",
+  "theme07.png",
+  "theme08.png",
+  "theme09.png",
+  "theme10.png",
+  "theme11.png",
+  "theme14.jpg",
+  "theme15.jpg",
+  "theme16.jpg",
+  "theme18.png",
+  "theme19.jpg",
+  "theme20.jpg",
 ];
 
-const CARDS: MorphCard[] = Array.from({ length: 20 }, (_, i) => {
-  const t = THEMES[i % THEMES.length];
-  return { ...t, id: `${t.id}-${i}` };
-});
+/* Accents only colour the flipped-over back face; the fronts are photographs. */
+const ACCENTS = [
+  { from: "#7c3aed", to: "#22d3ee" },
+  { from: "#ff6b2c", to: "#ffc46b" },
+  { from: "#d4af37", to: "#8a6f1f" },
+  { from: "#0ea5e9", to: "#34d399" },
+  { from: "#603ce3", to: "#ff6b2c" },
+];
+
+const CARDS: MorphCard[] = FILES.map((file, i) => ({
+  id: file,
+  label: `ธีมที่ ${String(i + 1).padStart(2, "0")}`,
+  image: `/themes/${file}`,
+  bg: "#0d0b1a",
+  ...ACCENTS[i % ACCENTS.length],
+}));
 
 export default function Themes() {
   return (

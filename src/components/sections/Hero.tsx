@@ -14,7 +14,7 @@ export default function Hero() {
     >
       <div className="relative z-10 mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
         {/* ---------- copy ---------- */}
-        <div>
+        <div className="text-center lg:text-left">
           <div className="inline-flex items-center gap-2.5 rounded-pill border border-violet-tint bg-white/70 py-1.5 pl-2 pr-4 backdrop-blur-md">
             <span className="rounded-pill bg-indigo px-2.5 py-1 font-display text-[10.5px] font-bold tracking-[0.1em] text-white">
               NEW
@@ -24,7 +24,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="mt-7 max-w-[560px] text-[34px] font-bold leading-[1.3] tracking-[-0.01em] sm:text-[42px] lg:text-[50px]">
+          <h1 className="mx-auto mt-7 max-w-[560px] lg:mx-0 text-[34px] font-bold leading-[1.3] tracking-[-0.01em] sm:text-[42px] lg:text-[50px]">
             {/* Thai has no spaces, so the browser may break mid-phrase.
                 Each line is its own block to keep the phrasing intact. */}
             <span className="block">
@@ -35,13 +35,13 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-5 max-w-[520px] text-[16px] text-ink-muted">
+          <p className="mx-auto mt-5 max-w-[520px] lg:mx-0 text-[16px] text-ink-muted">
             พลิกโฉมธุรกิจการเดิมพันของคุณให้เหนือชั้น
             และเติบโตได้อย่างไร้ขีดจำกัด ด้วยระบบอัตโนมัติ ที่ผสานความรวดเร็ว,
             ความปลอดภัยและความสมบูรณ์แบบตามมาตรฐานสากล จาก Auto Fast
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-5">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-5 lg:justify-start">
             <a
               href="#contact"
               className="inline-block rounded-xl bg-cta px-6 py-3.5 text-[15px] font-semibold text-white shadow-[0_0_24px_rgba(255,114,33,0.5),0_14px_34px_-10px_rgba(255,114,33,0.95)] transition-all hover:scale-[1.03] hover:shadow-[0_0_34px_rgba(255,114,33,0.75),0_18px_42px_-10px_rgba(255,114,33,1)]"
@@ -52,7 +52,7 @@ export default function Hero() {
             <AvatarStack />
           </div>
 
-          <dl className="mt-12 flex gap-9 border-t border-line pt-7">
+          <dl className="mt-12 flex justify-center gap-9 border-t border-line pt-7 lg:justify-start">
             {STATS.map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>

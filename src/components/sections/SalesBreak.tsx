@@ -24,7 +24,7 @@ export default function SalesBreak() {
       />
 
       {/* content still tracks the same 1180px column as the rest of the page */}
-      <div className="relative z-10 mx-auto flex max-w-[1180px] flex-col gap-8 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-10 lg:py-14">
+      <div className="relative z-10 mx-auto flex max-w-[1180px] flex-col items-center gap-8 px-6 py-12 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-10 lg:py-14 lg:text-left">
         <div>
           {/* Same badge treatment as the closing CTA so the two read as one
               family. */}
@@ -39,7 +39,7 @@ export default function SalesBreak() {
             คุยกับทีมขายของเรา
             <br className="hidden sm:block" /> ตอบไว ให้ข้อมูลครบทุกเรื่อง
           </h2>
-          <p className="mt-4 max-w-[560px] text-[15.5px] leading-[1.85] text-white/85">
+          <p className="mx-auto mt-4 max-w-[560px] text-[15.5px] leading-[1.85] text-white/85 lg:mx-0">
             ไม่ว่าจะเริ่มต้นเว็บแรกหรือกำลังขยายเป็นสิบแบรนด์
             ทีมงานพร้อมให้คำแนะนำและช่วยวางระบบให้เหมาะกับธุรกิจของคุณ
           </p>
@@ -47,7 +47,7 @@ export default function SalesBreak() {
 
         <a
           href="#contact"
-          className="shrink-0 self-start whitespace-nowrap rounded-xl bg-cta px-7 py-4 text-[15px] font-semibold text-white shadow-[0_0_24px_rgba(255,114,33,0.5),0_14px_34px_-10px_rgba(255,114,33,0.95)] transition-all hover:scale-[1.03] hover:shadow-[0_0_34px_rgba(255,114,33,0.75),0_18px_42px_-10px_rgba(255,114,33,1)] lg:self-auto"
+          className="shrink-0 whitespace-nowrap rounded-xl bg-cta px-7 py-4 text-[15px] font-semibold text-white shadow-[0_0_24px_rgba(255,114,33,0.5),0_14px_34px_-10px_rgba(255,114,33,0.95)] transition-all hover:scale-[1.03] hover:shadow-[0_0_34px_rgba(255,114,33,0.75),0_18px_42px_-10px_rgba(255,114,33,1)] lg:self-auto"
         >
           ติดต่อ Auto Fast
         </a>

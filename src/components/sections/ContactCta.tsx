@@ -11,7 +11,7 @@ export default function ContactCta() {
           className="pointer-events-none absolute -bottom-28 -right-16 h-72 w-72 rounded-full bg-orange/50 blur-3xl"
         />
 
-        <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="relative z-10 grid gap-8 text-center lg:grid-cols-[1fr_auto] lg:items-center lg:text-left">
           <div>
             <span className="inline-flex items-center gap-2 rounded-pill bg-white/10 px-3.5 py-2 font-display text-[14px] font-semibold uppercase tracking-[0.14em]">
               <i className="h-2.5 w-2.5 animate-pulse rounded-full bg-orange-soft" aria-hidden />
@@ -21,7 +21,7 @@ export default function ContactCta() {
               คุยกับทีมขายของเรา
               <br className="hidden sm:block" /> ตอบไว ให้ข้อมูลครบทุกเรื่อง
             </h2>
-            <p className="mt-4 max-w-[520px] text-[15.5px] leading-[1.85] text-white/70">
+            <p className="mx-auto mt-4 max-w-[520px] text-[15.5px] leading-[1.85] text-white/70 lg:mx-0">
               ไม่ว่าจะเริ่มต้นเว็บแรกหรือกำลังขยายเป็นสิบแบรนด์
               ทีมงานพร้อมให้คำแนะนำและช่วยวางระบบให้เหมาะกับธุรกิจของคุณ
             </p>

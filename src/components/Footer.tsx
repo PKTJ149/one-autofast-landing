@@ -19,16 +19,16 @@ export default function Footer() {
   return (
     <footer className="border-t border-line bg-surface px-6 py-14 lg:px-10">
       <div className="mx-auto max-w-[1180px]">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 text-center lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:text-left">
           <div>
             <Image
               src="/logo.png"
               alt="Auto Fast Track"
               width={211}
               height={47}
-              className="h-10 w-auto"
+              className="mx-auto h-10 w-auto lg:mx-0"
             />
-            <p className="mt-4 max-w-[300px] text-[14px] leading-[1.8] text-ink-muted">
+            <p className="mx-auto mt-4 max-w-[300px] text-[14px] leading-[1.8] text-ink-muted lg:mx-0">
               ระบบหลังบ้านครบวงจรสำหรับผู้ให้บริการแพลตฟอร์มออนไลน์
               รวมทุกเว็บไซต์ไว้ในที่เดียว
             </p>

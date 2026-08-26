@@ -50,22 +50,24 @@ export default function Gateways() {
           eyebrow="ตัวเลือกไม่จำกัด เชื่อถือได้ 100%"
           title={
             <>
-              <span className="block">ฝาก-ถอนไม่มีสะดุด</span>
-              <span className="block">เพราะไม่ได้พึ่งช่องทางเดียว</span>
+              <span className="block text-indigo">ฝาก–ถอนไม่สะดุด</span>
+              <span className="block">
+                ด้วยช่องทางการทำธุรกรรมมากมายที่พร้อมสลับใช้ได้ตลอดเวลา
+              </span>
             </>
           }
           description="เปิดใช้หลายช่องทางพร้อมกันได้ทั้งธนาคารอัตโนมัติ payment gateway หลายเจ้า ONE2Coin และคริปโต ถ้าช่องทางไหนช้าหรือปิดปรับปรุง ระบบย้ายรายการไปช่องทางถัดไปให้เอง ลูกค้าฝากถอนได้ต่อเนื่องโดยไม่รู้สึกว่ามีอะไรเกิดขึ้น"
         />
 
         {/* Supporting points */}
-        <dl className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <dl className="mt-10 grid gap-8 text-center lg:grid-cols-2 lg:gap-12 lg:text-left">
           {POINTS.map((pt) => (
             <div key={pt.term}>
-              <dt className="flex items-center gap-3 text-[19px] font-semibold sm:text-[21px]">
+              <dt className="flex items-center justify-center gap-3 text-[19px] font-semibold sm:text-[21px] lg:justify-start">
                 <i className="h-3 w-3 shrink-0 bg-orange" aria-hidden />
                 {pt.term}
               </dt>
-              <dd className="mt-2 pl-6 text-[15px] leading-[1.8] text-ink-muted">
+              <dd className="mt-2 text-[15px] leading-[1.8] text-ink-muted lg:pl-6">
                 {pt.body}
               </dd>
             </div>

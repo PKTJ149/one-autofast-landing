@@ -40,13 +40,13 @@ export default function SectionHeading({
 
   if (align === "stacked") {
     return (
-      <div className="border-b border-line pb-10">
+      <div className="border-b border-line pb-10 text-center lg:text-left">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 className="mt-4 max-w-[760px] text-[28px] font-bold tracking-[-0.01em] sm:text-[36px]">
+        <h2 className="mx-auto mt-4 max-w-[760px] lg:mx-0 text-[28px] font-bold tracking-[-0.01em] sm:text-[36px]">
           {title}
         </h2>
         {description && (
-          <p className="mt-4 max-w-[940px] text-[15.5px] text-ink-muted">
+          <p className="mx-auto mt-4 max-w-[940px] lg:mx-0 text-[15.5px] text-ink-muted">
             {description}
           </p>
         )}
@@ -55,7 +55,7 @@ export default function SectionHeading({
   }
 
   return (
-    <div className="grid gap-6 border-b border-line pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+    <div className="grid gap-6 border-b border-line pb-10 text-center lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16 lg:text-left">
       <div>
         <Eyebrow>{eyebrow}</Eyebrow>
         <h2 className="mt-4 text-[28px] font-bold tracking-[-0.01em] sm:text-[36px]">
