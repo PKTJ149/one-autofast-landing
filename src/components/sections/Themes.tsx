@@ -53,11 +53,28 @@ export default function Themes() {
               ปรับแต่งเว็บให้ดึงดูดลูกค้า
             </span>
             {/* one line once the ring is wide enough to clear it */}
-            <h2 className="mt-4 text-[26px] font-bold tracking-[-0.01em] sm:text-[34px] lg:whitespace-nowrap">
+            {/* Kept on one line, and small enough that the ring clears it
+                even on a 900px-tall screen. */}
+            <h2 className="mt-4 text-[26px] font-bold tracking-[-0.01em] sm:text-[30px] lg:whitespace-nowrap">
               โดดเด่นด้วยธีมที่ออกแบบมาอย่างดี
             </h2>
             <p className="mt-3 font-display text-[12px] font-bold uppercase tracking-[0.2em] text-ink-faint">
               เลื่อนลงเพื่อดูธีมทั้งหมด
+            </p>
+          </>
+        }
+        mobileHeader={
+          <>
+            <span className="inline-flex items-center gap-2.5 font-display text-[14px] font-semibold uppercase tracking-[0.16em] text-violet">
+              <i className="h-2.5 w-2.5 rounded-full bg-orange" aria-hidden />
+              ปรับแต่งเว็บให้ดึงดูดลูกค้า
+            </span>
+            <h2 className="mt-4 text-[26px] font-bold tracking-[-0.01em]">
+              โดดเด่นด้วยธีมที่ออกแบบมาอย่างดี
+            </h2>
+            <p className="mt-3 text-[15.5px] leading-[1.85] text-ink-muted">
+              ไม่ว่าจะเรียบหรู ทันสมัย หรือสดใส ยกระดับภาพลักษณ์
+              แตกต่างจากคู่แข่ง และสร้างความเชื่อมั่นให้ลูกค้า
             </p>
           </>
         }

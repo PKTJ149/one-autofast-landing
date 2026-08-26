@@ -21,7 +21,7 @@ const STEPS = [
 
 export default function One2Coin() {
   return (
-    <section id="products" className="px-6 pb-8 lg:px-10">
+    <section id="products" className="overflow-x-clip px-6 pb-8 lg:px-10">
       {/* The violet band is its own clipped layer so the phone artwork can
           break out past the rounded edges. */}
       <div className="relative mx-auto max-w-[1180px] text-white">

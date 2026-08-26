@@ -202,10 +202,13 @@ export default function ScrollMorphHero({
   cards,
   intro,
   detail,
+  mobileHeader,
 }: {
   cards: MorphCard[];
   intro: ReactNode;
   detail: ReactNode;
+  /** Shown above the mobile carousel; falls back to `detail`. */
+  mobileHeader?: ReactNode;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -213,6 +216,17 @@ export default function ScrollMorphHero({
 
   const [phase, setPhase] = useState<Phase>("scatter");
   const [size, setSize] = useState({ width: 0, height: 0 });
+  /* The ring needs room the phone simply does not have, so below lg we
+     render a carousel instead and never mount the animated cards. */
+  const [ringEnabled, setRingEnabled] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setRingEnabled(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   /* stage size */
   useEffect(() => {
@@ -305,7 +319,44 @@ export default function ScrollMorphHero({
   const total = cards.length;
 
   return (
-    <div ref={wrapRef} className="relative h-[190vh]">
+    <>
+      {/* ---------- mobile: a plain horizontal carousel ---------- */}
+      <div className="px-6 py-20 lg:hidden">
+        <div className="mx-auto max-w-[560px] text-center">
+          {mobileHeader ?? detail}
+        </div>
+
+        <ul className="-mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4">
+          {cards.map((card) => (
+            <li key={card.id} className="w-[172px] shrink-0 snap-center">
+              {card.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={card.image}
+                  alt={card.label}
+                  loading="lazy"
+                  className="h-auto w-full rounded-2xl shadow-lg ring-1 ring-black/10"
+                />
+              ) : (
+                <div
+                  className="aspect-[66/143] w-full rounded-2xl ring-1 ring-black/10"
+                  style={{ background: card.bg }}
+                />
+              )}
+              <p className="mt-2 text-center text-[12.5px] text-ink-muted">
+                {card.label}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-2 text-center text-[12.5px] text-ink-faint">
+          ปัดซ้าย–ขวาเพื่อดูธีมทั้งหมด {cards.length} แบบ
+        </p>
+      </div>
+
+      {/* ---------- desktop: the morphing ring ---------- */}
+      <div ref={wrapRef} className="relative hidden h-[190vh] lg:block">
       <div
         ref={stageRef}
         className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden"
@@ -327,7 +378,8 @@ export default function ScrollMorphHero({
         </motion.div>
 
         <div className="relative flex h-full w-full items-center justify-center">
-          {cards.map((card, i) => {
+          {ringEnabled &&
+            cards.map((card, i) => {
             let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
 
             if (phase === "scatter") {
@@ -343,9 +395,15 @@ export default function ScrollMorphHero({
               };
             } else {
               const isMobile = size.width < 768;
-              const minSide = Math.min(size.width, size.height);
 
-              const circleRadius = Math.min(minSide * 0.44, 460);
+              /* A rotated card reaches out by half its height, so the ring has
+                 to fit the stage minus that, and stay wide enough to clear the
+                 headline sitting in the middle. */
+              const cardReach = (CARD_H * CIRCLE_SCALE) / 2;
+              const circleRadius = Math.min(
+                Math.max(size.height / 2 - cardReach - 12, 300),
+                460,
+              );
               const circleAngle = (i / total) * 360;
               const circleRad = (circleAngle * Math.PI) / 180;
 
@@ -377,10 +435,11 @@ export default function ScrollMorphHero({
               };
             }
 
-            return <Card key={card.id} card={card} target={target} />;
-          })}
+              return <Card key={card.id} card={card} target={target} />;
+            })}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
