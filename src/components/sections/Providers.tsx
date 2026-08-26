@@ -3,12 +3,8 @@
 import { useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 
-/**
- * Logos come straight from the design hand-off, one folder per category.
- * Some are white artwork meant for a dark surface — those are flagged
- * `onDark` so the tile behind them flips to the ink colour.
- */
-type Provider = { name: string; logo: string; onDark?: boolean };
+/** Logos come straight from the design hand-off, one folder per category. */
+type Provider = { name: string; logo: string };
 type Group = { key: string; label: string; note: string; items: Provider[] };
 
 const GROUPS: Group[] = [
@@ -17,14 +13,14 @@ const GROUPS: Group[] = [
     label: "กีฬา",
     note: "ครบทุกลีกดัง ทั้งฟุตบอล บาสเกตบอล และมวย",
     items: [
-        { name: "3 Sing", logo: "/providers/sport/3sing.png", onDark: true },
+        { name: "3 Sing", logo: "/providers/sport/3sing.png" },
         { name: "CMD", logo: "/providers/sport/cmd.png" },
-        { name: "LSM Sport", logo: "/providers/sport/lsmsport.png", onDark: true },
-        { name: "ONE-BX", logo: "/providers/sport/onebx.png", onDark: true },
+        { name: "LSM Sport", logo: "/providers/sport/lsmsport.png" },
+        { name: "ONE-BX", logo: "/providers/sport/onebx.png" },
         { name: "ONE-BX All New", logo: "/providers/sport/onebxallnew.png" },
         { name: "SABA Sports", logo: "/providers/sport/sabasports.png" },
         { name: "Sbobet", logo: "/providers/sport/sbobet.png" },
-        { name: "Sport LSM", logo: "/providers/sport/sportlsm.png", onDark: true },
+        { name: "Sport LSM", logo: "/providers/sport/sportlsm.png" },
     ],
   },
   {
@@ -33,15 +29,15 @@ const GROUPS: Group[] = [
     note: "ถ่ายทอดสดจากสตูดิโอจริง ครบทุกเกมโต๊ะ",
     items: [
         { name: "AE Gaming", logo: "/providers/casino/ae-gaming.png" },
-        { name: "Astar", logo: "/providers/casino/astar.png", onDark: true },
+        { name: "Astar", logo: "/providers/casino/astar.png" },
         { name: "BG", logo: "/providers/casino/bg.png" },
         { name: "Casino Game", logo: "/providers/casino/casinogame.png" },
         { name: "Dream Gaming", logo: "/providers/casino/dreamgaming.png" },
         { name: "eBET", logo: "/providers/casino/ebet.png" },
-        { name: "Evolution", logo: "/providers/casino/evolution.png", onDark: true },
+        { name: "Evolution", logo: "/providers/casino/evolution.png" },
         { name: "KA Gaming", logo: "/providers/casino/kagaming.png" },
-        { name: "Mango Play", logo: "/providers/casino/mangoplay.png", onDark: true },
-        { name: "Playtech ONE", logo: "/providers/casino/playtechone.png", onDark: true },
+        { name: "Mango Play", logo: "/providers/casino/mangoplay.png" },
+        { name: "Playtech ONE", logo: "/providers/casino/playtechone.png" },
         { name: "Pragmatic Play", logo: "/providers/casino/pragmaticplay.png" },
         { name: "Pretty Gaming", logo: "/providers/casino/prettygaming.png" },
         { name: "SA Gaming", logo: "/providers/casino/sa-gaming.png" },
@@ -51,7 +47,7 @@ const GROUPS: Group[] = [
         { name: "W Casino", logo: "/providers/casino/wcasino.png" },
         { name: "WM Casino", logo: "/providers/casino/wmcasino.png" },
         { name: "World Entertainment", logo: "/providers/casino/world-entertainment.png" },
-        { name: "YB Live", logo: "/providers/casino/yblive.png", onDark: true },
+        { name: "YB Live", logo: "/providers/casino/yblive.png" },
     ],
   },
   {
@@ -62,18 +58,18 @@ const GROUPS: Group[] = [
         { name: "10 1", logo: "/providers/slot/10-1.png" },
         { name: "FC Fachai", logo: "/providers/slot/fc-fachai.png" },
         { name: "ABI Game", logo: "/providers/slot/abigame.png" },
-        { name: "Alize", logo: "/providers/slot/alize.png", onDark: true },
-        { name: "AllBet", logo: "/providers/slot/allbet.png", onDark: true },
+        { name: "Alize", logo: "/providers/slot/alize.png" },
+        { name: "AllBet", logo: "/providers/slot/allbet.png" },
         { name: "Amigo", logo: "/providers/slot/amigo.png" },
-        { name: "ANB Slot", logo: "/providers/slot/anbslot.png", onDark: true },
+        { name: "ANB Slot", logo: "/providers/slot/anbslot.png" },
         { name: "AP Advant Play", logo: "/providers/slot/apadvantplay.png" },
         { name: "BlackAnt", logo: "/providers/slot/blackant.png" },
-        { name: "BNG", logo: "/providers/slot/bng.png", onDark: true },
-        { name: "BT Gaming", logo: "/providers/slot/btgaming.png", onDark: true },
+        { name: "BNG", logo: "/providers/slot/bng.png" },
+        { name: "BT Gaming", logo: "/providers/slot/btgaming.png" },
         { name: "Cherry Gaming", logo: "/providers/slot/cherrygaming.png" },
         { name: "Dragon Soft", logo: "/providers/slot/dragon-soft.png" },
         { name: "EpicWin", logo: "/providers/slot/epicwin.png" },
-        { name: "Fastspin", logo: "/providers/slot/fastspin.png", onDark: true },
+        { name: "Fastspin", logo: "/providers/slot/fastspin.png" },
         { name: "Funky Games", logo: "/providers/slot/funky-games.png" },
         { name: "Galaxsys", logo: "/providers/slot/galaxsys.png" },
         { name: "Gameplay Interactive", logo: "/providers/slot/gameplayinteractive.png" },
@@ -84,14 +80,14 @@ const GROUPS: Group[] = [
         { name: "Kingmaker", logo: "/providers/slot/kingmaker.png" },
         { name: "MegaWin", logo: "/providers/slot/megawin.png" },
         { name: "Microgaming", logo: "/providers/slot/microgaming.png" },
-        { name: "MP Poke", logo: "/providers/slot/mp-poke.png", onDark: true },
+        { name: "MP Poke", logo: "/providers/slot/mp-poke.png" },
         { name: "Naga", logo: "/providers/slot/naga.png" },
         { name: "Next Spin", logo: "/providers/slot/nextspin.png" },
         { name: "Nolimit", logo: "/providers/slot/nolimit.png" },
         { name: "PG 1", logo: "/providers/slot/pg-1.png" },
         { name: "PG", logo: "/providers/slot/pg.png" },
         { name: "Play Star", logo: "/providers/slot/playstar.png" },
-        { name: "RB7 Slot", logo: "/providers/slot/rb7slot.png", onDark: true },
+        { name: "RB7 Slot", logo: "/providers/slot/rb7slot.png" },
         { name: "Red Tiger", logo: "/providers/slot/red-tiger.png" },
         { name: "Relax", logo: "/providers/slot/relax.png" },
         { name: "Rich88", logo: "/providers/slot/rich88.png" },
@@ -109,11 +105,11 @@ const GROUPS: Group[] = [
     label: "หวย & คีโน",
     note: "รองรับทุกรูปแบบการแทง ทั้งไทยและต่างประเทศ",
     items: [
-        { name: "F1 Lotto", logo: "/providers/lotto/f1lotto.png", onDark: true },
+        { name: "F1 Lotto", logo: "/providers/lotto/f1lotto.png" },
         { name: "Lam Lotto", logo: "/providers/lotto/lamlotto.png" },
         { name: "Lotto Exit", logo: "/providers/lotto/lottoexit.png" },
         { name: "Lotto Plus", logo: "/providers/lotto/lottoplus.png" },
-        { name: "LSM99 Lotto", logo: "/providers/lotto/lsm99lotto.png", onDark: true },
+        { name: "LSM99 Lotto", logo: "/providers/lotto/lsm99lotto.png" },
         { name: "My Lotto", logo: "/providers/lotto/mylotto.png" },
         { name: "ONE Lotto", logo: "/providers/lotto/onelotto.png" },
         { name: "QQ Keno", logo: "/providers/lotto/qqkeno.png" },
@@ -202,21 +198,21 @@ export default function Providers() {
               {items.map((p) => (
                 <li
                   key={p.logo}
-                  className={`grid h-16 place-items-center rounded-xl border px-3 transition-colors ${
-                    p.onDark
-                      ? "border-ink/15 bg-ink hover:border-violet-soft"
-                      : "border-line bg-canvas hover:border-violet-soft hover:bg-violet-tint"
-                  }`}
+                  className="flex min-h-[104px] flex-col items-center justify-center gap-2 rounded-xl border border-line bg-canvas px-3 py-3 transition-colors hover:border-violet-soft hover:bg-violet-tint"
                 >
+                  {/* Decorative: the name sits right below as real text. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={p.logo}
-                    alt={p.name}
+                    alt=""
                     width={216}
                     height={80}
                     loading="lazy"
-                    className="max-h-10 w-auto max-w-full object-contain"
+                    className="max-h-9 w-auto max-w-full object-contain"
                   />
+                  <span className="w-full truncate text-center text-[12.5px] font-medium text-ink-muted">
+                    {p.name}
+                  </span>
                 </li>
               ))}
             </ul>
