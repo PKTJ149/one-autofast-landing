@@ -36,10 +36,10 @@ export default function Navbar() {
                     <Image
             src="/logo.png"
             alt="Auto Fast Track"
-            width={211}
-            height={47}
+            width={934}
+            height={136}
             priority
-            className="h-7 w-auto sm:h-9"
+            className="h-6 w-auto sm:h-8"
           />
         </a>
 

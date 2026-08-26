@@ -10,7 +10,6 @@ import Features from "@/components/sections/Features";
 import Themes from "@/components/sections/Themes";
 import Providers from "@/components/sections/Providers";
 import Services from "@/components/sections/Services";
-import Tools from "@/components/sections/Tools";
 import ContactCta from "@/components/sections/ContactCta";
 
 export default function Home() {
@@ -28,7 +27,6 @@ export default function Home() {
         <SystemTabs />
         <Providers />
         <Services />
-        <Tools />
         <ContactCta />
       </main>
       <Footer />

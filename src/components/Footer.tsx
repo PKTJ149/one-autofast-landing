@@ -24,9 +24,9 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt="Auto Fast Track"
-              width={211}
-              height={47}
-              className="mx-auto h-10 w-auto lg:mx-0"
+              width={934}
+              height={136}
+              className="mx-auto h-9 w-auto lg:mx-0"
             />
             <p className="mx-auto mt-4 max-w-[300px] text-[14px] leading-[1.8] text-ink-muted lg:mx-0">
               ระบบหลังบ้านครบวงจรสำหรับผู้ให้บริการแพลตฟอร์มออนไลน์
