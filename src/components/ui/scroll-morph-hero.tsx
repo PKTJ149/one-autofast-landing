@@ -22,7 +22,6 @@ import {
 } from "react";
 import {
   motion,
-  useInView,
   useMotionValue,
   useScroll,
   useSpring,
@@ -212,20 +211,28 @@ export default function ScrollMorphHero({
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(wrapRef, { once: true, margin: "-20% 0px" });
 
   const [phase, setPhase] = useState<Phase>("scatter");
   const [size, setSize] = useState({ width: 0, height: 0 });
-  /* The ring needs room the phone simply does not have, so below lg we
-     render a carousel instead and never mount the animated cards. */
+  /* The ring only works on a window that is both wide and landscape-ish.
+     A tall narrow one — a phone, or a 1024px window stretched down a big
+     display — blows the geometry up, so those get the carousel instead.
+     Starting false means the carousel is what renders first. */
   const [ringEnabled, setRingEnabled] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
+    const mq = window.matchMedia(
+      "(min-width: 1024px) and (min-aspect-ratio: 5/4)",
+    );
     const apply = () => setRingEnabled(mq.matches);
     apply();
     mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    /* Belt and braces: some environments resize without firing the query. */
+    window.addEventListener("resize", apply);
+    return () => {
+      mq.removeEventListener("change", apply);
+      window.removeEventListener("resize", apply);
+    };
   }, []);
 
   /* stage size */
@@ -243,16 +250,32 @@ export default function ScrollMorphHero({
     return () => ro.disconnect();
   }, []);
 
-  /* intro runs once the section is on screen */
+  /* Intro runs once the ring is on screen. It has to observe *after*
+     ringEnabled flips, because the wrapper does not exist before then —
+     watching it from mount would silently never fire. */
   useEffect(() => {
-    if (!inView) return;
-    const a = setTimeout(() => setPhase("line"), 300);
-    const b = setTimeout(() => setPhase("circle"), 1600);
+    if (!ringEnabled) return;
+    const el = wrapRef.current;
+    if (!el) return;
+
+    let a = 0, b = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        a = window.setTimeout(() => setPhase("line"), 300);
+        b = window.setTimeout(() => setPhase("circle"), 1600);
+      },
+      { rootMargin: "-20% 0px" },
+    );
+    io.observe(el);
+
     return () => {
-      clearTimeout(a);
-      clearTimeout(b);
+      io.disconnect();
+      window.clearTimeout(a);
+      window.clearTimeout(b);
     };
-  }, [inView]);
+  }, [ringEnabled]);
 
   /* page scroll drives the morph — no wheel capture */
   const { scrollYProgress } = useScroll({
@@ -321,7 +344,8 @@ export default function ScrollMorphHero({
   return (
     <>
       {/* ---------- mobile: a plain horizontal carousel ---------- */}
-      <div className="px-6 py-20 lg:hidden">
+      {!ringEnabled && (
+      <div className="px-6 py-20">
         <div className="mx-auto max-w-[560px] text-center">
           {mobileHeader ?? detail}
         </div>
@@ -354,9 +378,11 @@ export default function ScrollMorphHero({
           ปัดซ้าย–ขวาเพื่อดูธีมทั้งหมด {cards.length} แบบ
         </p>
       </div>
+      )}
 
       {/* ---------- desktop: the morphing ring ---------- */}
-      <div ref={wrapRef} className="relative hidden h-[190vh] lg:block">
+      {ringEnabled && (
+      <div ref={wrapRef} className="relative h-[190vh]">
       <div
         ref={stageRef}
         className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden"
@@ -400,10 +426,8 @@ export default function ScrollMorphHero({
                  to fit the stage minus that, and stay wide enough to clear the
                  headline sitting in the middle. */
               const cardReach = (CARD_H * CIRCLE_SCALE) / 2;
-              const circleRadius = Math.min(
-                Math.max(size.height / 2 - cardReach - 12, 300),
-                460,
-              );
+              const fits = Math.min(size.width, size.height) / 2 - cardReach - 12;
+              const circleRadius = Math.min(Math.max(fits, 300), 460);
               const circleAngle = (i / total) * 360;
               const circleRad = (circleAngle * Math.PI) / 180;
 
@@ -440,6 +464,7 @@ export default function ScrollMorphHero({
         </div>
       </div>
       </div>
+      )}
     </>
   );
 }

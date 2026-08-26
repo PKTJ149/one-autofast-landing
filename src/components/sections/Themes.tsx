@@ -55,7 +55,7 @@ export default function Themes() {
             {/* one line once the ring is wide enough to clear it */}
             {/* Kept on one line, and small enough that the ring clears it
                 even on a 900px-tall screen. */}
-            <h2 className="mt-4 text-[26px] font-bold tracking-[-0.01em] sm:text-[30px] lg:whitespace-nowrap">
+            <h2 className="mt-4 text-[24px] font-bold tracking-[-0.01em] sm:text-[26px] lg:whitespace-nowrap">
               โดดเด่นด้วยธีมที่ออกแบบมาอย่างดี
             </h2>
             <p className="mt-3 font-display text-[12px] font-bold uppercase tracking-[0.2em] text-ink-faint">
