@@ -328,7 +328,7 @@ export default function ScrollMorphHero({
 
         <ul className="-mx-6 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4">
           {cards.map((card) => (
-            <li key={card.id} className="w-[172px] shrink-0 snap-center">
+            <li key={card.id} className="w-[128px] shrink-0 snap-center">
               {card.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -343,7 +343,7 @@ export default function ScrollMorphHero({
                   style={{ background: card.bg }}
                 />
               )}
-              <p className="mt-2 text-center text-[12.5px] text-ink-muted">
+              <p className="mt-2 text-center text-[11.5px] text-ink-muted">
                 {card.label}
               </p>
             </li>
