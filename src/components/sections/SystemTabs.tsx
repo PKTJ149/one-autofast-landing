@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -9,14 +10,18 @@ type Tab = {
   title: string;
   body: string;
   metrics: { label: string; value: string }[];
+  /** Screenshot of this screen, 932x555. Drop the file in /public/systems
+   *  and set the path here; until then the panel shows a sized placeholder. */
+  image?: string;
 };
 
 const TABS: Tab[] = [
   {
     key: "backend",
+    image: "/systems/backend.png",
     label: "จัดการหลังบ้าน",
-    title: "จัดการหลังบ้านครบในที่เดียว",
-    body: "เลิกจัดการหลายระบบ หลายทีม และหลายฐานข้อมูล รวมทุกเว็บไซต์ ทุกแบรนด์ และทุกโปรเจกต์ไว้ในแพลตฟอร์มเดียว",
+    title: "ระบบบริหารหลังบ้านทุกเว็บด้วยเว็บเดียว (All in one backend management)",
+    body: "หมดปัญหากับการดูแลหลายระบบ หลายหลังบ้าน หลายฐานข้อมูล ที่ต้องแยกทีม แยกบัญชี ด้วยระบบของเรา ทำให้ทุกเว็บไซต์ ทุกแบรนด์ หรือทุกโปรเจกต์ จะถูกรวบรวมไว้ในที่เดียว",
     metrics: [
       { label: "เว็บไซต์ที่เชื่อมต่อ", value: "18" },
       { label: "แบรนด์", value: "5" },
@@ -25,9 +30,10 @@ const TABS: Tab[] = [
   },
   {
     key: "finance",
+    image: "/systems/finance.png",
     label: "ระบบการเงิน",
-    title: "ระบบจัดการการเงินแบบเรียลไทม์",
-    body: "ติดตามรายรับ รายจ่าย และออกรายงานได้ทันที ด้วยฟังก์ชันครบครันและมาตรฐานความปลอดภัยระดับสูงสุด",
+    title: "ระบบการจัดการการเงิน (Financial Management)",
+    body: "จัดการการเงินของคุณได้อย่างง่ายดาย ครบทุกฟังก์ชัน ทั้งรายรับ รายจ่าย รายงานผลแบบเรียลไทม์ พร้อมความปลอดภัยสูงสุด!",
     metrics: [
       { label: "ยอดฝากวันนี้", value: "฿2.10M" },
       { label: "ยอดถอนวันนี้", value: "฿1.44M" },
@@ -36,9 +42,10 @@ const TABS: Tab[] = [
   },
   {
     key: "affiliate",
-    label: "ระบบพันธมิตร",
-    title: "ระบบแนะนำเพื่อนที่ใช้งานง่าย",
-    body: "เพิ่มรายได้ด้วยระบบพันธมิตร รับค่าคอมมิชชั่นจากทุกการแนะนำ ทั้งยอดเทิร์นโอเวอร์และสมาชิกใหม่",
+    image: "/systems/affiliate.png",
+    label: "ระบบแนะนำเพื่อน",
+    title: "ระบบแนะนำเพื่อน (Affiliate Program)",
+    body: "เพิ่มความสนุกพร้อมรายได้ ด้วยระบบแนะนำเพื่อน รับค่าคอมมิชชันได้ง่าย ๆ ในทุกการเชิญชวน ทั้งยอดเทิร์นโอเวอร์ และการแนะนำเพื่อนเองก็ได้ด้วย",
     metrics: [
       { label: "พันธมิตรทั้งหมด", value: "1,204" },
       { label: "สมาชิกใหม่", value: "312" },
@@ -47,9 +54,10 @@ const TABS: Tab[] = [
   },
   {
     key: "promo",
+    image: "/systems/promo.png",
     label: "จัดการโปรโมชั่น",
-    title: "สร้างและปรับแต่งโปรโมชั่นได้เอง",
-    body: "จัดการแคมเปญได้อย่างอิสระ ปรับตั้งค่าได้หลากหลาย ตอบโจทย์ทุกความต้องการทางการตลาดตามเทรนด์ปัจจุบัน",
+    title: "ระบบจัดการโปรโมชั่น (Promotions Management)",
+    body: "สร้างและปรับแต่งโปรโมชั่นได้ง่าย ๆ ทุกแคมเปญ จัดการได้ครบถ้วนและตอบโจทย์ทุกการตลาด ตั้งค่าได้หลากหลาย ตอบรับทุกรูปแบบการตลาด ไม่ตกแม้กระแสเทรนด์ต่าง ๆ ที่มาแรง",
     metrics: [
       { label: "แคมเปญที่ใช้งาน", value: "27" },
       { label: "อัตราเข้าร่วม", value: "64%" },
@@ -58,9 +66,10 @@ const TABS: Tab[] = [
   },
   {
     key: "staff",
+    image: "/systems/staff.png",
     label: "จัดการพนักงาน",
-    title: "บริหารทีมอย่างมืออาชีพ",
-    body: "ระบบจัดการพนักงานครบวงจร ติดตามผลงานรายบุคคล กำหนดสิทธิ์การเข้าถึง และเพิ่มประสิทธิภาพการทำงานได้ง่าย",
+    title: "ระบบจัดการพนักงาน (Employee Management)",
+    body: "บริหารทีมงานได้อย่างมืออาชีพด้วยระบบจัดการพนักงานที่ครบวงจร พร้อมทั้งติดตามประสิทธิภาพการทำงานได้ง่ายดาย!",
     metrics: [
       { label: "พนักงานในระบบ", value: "36" },
       { label: "ระดับสิทธิ์", value: "8" },
@@ -146,25 +155,30 @@ export default function SystemTabs() {
               ))}
             </dl>
 
-            {/* generic panel chrome so each tab reads as a real screen */}
-            <div className="mt-6 overflow-hidden rounded-2xl border border-line">
-              <div className="flex items-center gap-2 border-b border-line bg-canvas px-4 py-2.5">
-                <i className="h-2.5 w-2.5 rounded-full bg-orange/60" aria-hidden />
-                <i className="h-2.5 w-2.5 rounded-full bg-violet/40" aria-hidden />
-                <span className="ml-2 font-display text-[11.5px] tracking-[0.08em] text-ink-faint">
-                  {tab.key}.autofasttrack.io
-                </span>
+            {/* Screenshot slot — 932x554 */}
+            {tab.image ? (
+              <Image
+                src={tab.image}
+                alt={tab.title}
+                width={932}
+                height={555}
+                className="mt-6 h-auto w-full rounded-2xl border border-line"
+              />
+            ) : (
+              <div className="mt-6 grid aspect-[932/555] w-full place-items-center rounded-2xl border-2 border-dashed border-line bg-tint text-center">
+                <div>
+                  <p className="font-display text-[13px] font-semibold uppercase tracking-[0.14em] text-ink-faint">
+                    ภาพหน้าจอระบบ
+                  </p>
+                  <p className="mt-1.5 font-display text-[15px] font-bold text-violet-deep">
+                    932 × 555 px
+                  </p>
+                  <p className="mt-1 text-[12.5px] text-ink-faint">
+                    /systems/{tab.key}.png
+                  </p>
+                </div>
               </div>
-              <div className="flex h-32 items-end gap-2 px-5 py-4" aria-hidden>
-                {[38, 62, 45, 80, 55, 71, 92, 60, 74].map((h, i) => (
-                  <i
-                    key={i}
-                    style={{ height: `${h}%` }}
-                    className="flex-1 rounded-t-md bg-gradient-to-b from-violet to-orange/20"
-                  />
-                ))}
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

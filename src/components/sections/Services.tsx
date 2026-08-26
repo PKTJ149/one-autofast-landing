@@ -1,58 +1,100 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import SectionHeading from "@/components/SectionHeading";
 
-const SPECS: [string, string][] = [
-  [
-    "ระบบจัดการเว็บไซต์",
-    "ควบคุมทุกเว็บไซต์และทุกแบรนด์จากหน้าจอเดียว ตั้งค่าแยกรายเว็บได้อิสระ",
-  ],
-  [
-    "ระบบจัดการการเงิน",
-    "ติดตามรายรับรายจ่าย ออกรายงานเรียลไทม์ พร้อมมาตรฐานความปลอดภัยระดับสูง",
-  ],
-  [
-    "ระบบจัดการฟีเจอร์",
-    "เปิด-ปิดฟีเจอร์แต่ละตัวได้ตามต้องการ ปรับให้เหมาะกับกลุ่มลูกค้าของแต่ละแบรนด์",
-  ],
-  [
-    "ระบบซัพพอร์ต 24/7",
-    "ทีมงานพร้อมให้ข้อมูลและช่วยแก้ปัญหาตลอดเวลา ไม่มีวันหยุด",
-  ],
-  [
-    "สัญญาเช่าระบบฝาก–ถอนอัตโนมัติ",
-    "กำหนดเงื่อนไขการฝากและถอนได้เองตามรูปแบบธุรกิจ ตั้งค่าผ่าน Auto Fast Track ได้ทันที",
-  ],
+/* Product banners, 672x225. */
+const BANNERS = [
+  "/products/product01.png",
+  "/products/product02.png",
+  "/products/product03.png",
+  "/products/product04.png",
+  "/products/product05.png",
 ];
 
+const INTERVAL = 3500;
+
 export default function Services() {
+  /* Two banners fit side by side from the lg breakpoint up, one below it. */
+  const [perView, setPerView] = useState(1);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setPerView(mq.matches ? 2 : 1);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  const maxIndex = Math.max(0, BANNERS.length - perView);
+  /* Derive the shown position instead of correcting state in an effect —
+     perView can shrink and leave the stored index out of range. */
+  const current = Math.min(index, maxIndex);
+
+  useEffect(() => {
+    if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (Math.min(i, maxIndex) >= maxIndex ? 0 : i + 1));
+    }, INTERVAL);
+    return () => window.clearInterval(id);
+  }, [paused, maxIndex]);
+
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-[1180px]">
         <SectionHeading
+          align="stacked"
           eyebrow="เสถียร เร็ว พร้อมขับเคลื่อน"
           title="บริการทั้งหมดของ Auto Fast Track"
           description="ระบบที่พร้อมรองรับการเติบโตของธุรกิจคุณตั้งแต่วันแรก ไม่ต้องรอพัฒนาเพิ่ม"
         />
 
-        {/* Spec sheet — plain numbered rows on hairlines, no cards at all.
-            A deliberate quiet beat between the heavier sections. */}
-        <dl className="mt-4">
-          {SPECS.map(([term, desc], i) => (
-            <div
-              key={term}
-              className="group grid gap-2 border-b border-line py-7 transition-colors hover:bg-tint/50 sm:grid-cols-[64px_minmax(0,300px)_1fr] sm:items-baseline sm:gap-6"
-            >
-              <span className="font-display text-[13px] font-bold tracking-[0.1em] text-orange">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <dt className="text-[17px] font-semibold sm:text-[18px]">
-                {term}
-              </dt>
-              <dd className="text-[15px] leading-[1.8] text-ink-muted">
-                {desc}
-              </dd>
-            </div>
+        {/* Auto-advancing banner carousel */}
+        <div
+          className="mt-10 overflow-hidden"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${current * (100 / perView)}%)` }}
+          >
+            {BANNERS.map((src, i) => (
+              <div
+                key={src}
+                style={{ flex: `0 0 ${100 / perView}%` }}
+                className="px-2"
+              >
+                <Image
+                  src={src}
+                  alt={`แบนเนอร์ผลิตภัณฑ์ ${i + 1}`}
+                  width={672}
+                  height={225}
+                  className="h-auto w-full rounded-2xl"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* position dots */}
+        <div className="mt-6 flex justify-center gap-2">
+          {Array.from({ length: maxIndex + 1 }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`ไปยังแบนเนอร์ชุดที่ ${i + 1}`}
+              aria-current={i === current}
+              className={`h-2 rounded-pill transition-all ${
+                i === current ? "w-7 bg-violet" : "w-2 bg-line hover:bg-violet-soft"
+              }`}
+            />
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );
